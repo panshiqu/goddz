@@ -29,6 +29,7 @@ func (p *Processor) OnEvent(user string, message string) {
 	if !ok {
 		// 创建用户
 		player = new(Player)
+		player.SetOpenID(user)
 		p.players[user] = player
 	}
 

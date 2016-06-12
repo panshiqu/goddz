@@ -8,6 +8,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"logic"
 	"net/http"
 	"sort"
 	"strings"
@@ -94,12 +95,14 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 		log.Println(requestBody)
 
+		go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
+
 		responseBody := &TextResponseBody{
 			ToUserName:   value2CDATA(requestBody.FromUserName),
 			FromUserName: value2CDATA(requestBody.ToUserName),
 			CreateTime:   time.Duration(time.Now().Unix()),
 			MsgType:      value2CDATA("text"),
-			Content:      value2CDATA("斗地主残局"),
+			Content:      value2CDATA(""),
 		}
 
 		log.Println(responseBody)
