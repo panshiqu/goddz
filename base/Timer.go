@@ -2,9 +2,10 @@ package base
 
 import (
 	"log"
-	"logic"
 	"sync"
 	"time"
+
+	"github.com/panshiqu/goddz/logic"
 )
 
 // TimerElement 定时器

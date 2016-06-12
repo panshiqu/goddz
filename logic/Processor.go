@@ -1,16 +1,52 @@
 package logic
 
 import (
-	"wechat"
+	"log"
+	"math/rand"
+	"time"
+
+	"github.com/panshiqu/goddz/wechat"
+	"github.com/seefan/gossdb"
 )
 
 // Processor 处理器
 type Processor struct {
 	players map[string]*Player
+	ssdb    *gossdb.Connectors
+	random  *rand.Rand
 }
 
 // 实例
 var ins *Processor
+
+// SsdbPool 获取连接池
+func (p *Processor) SsdbPool() *gossdb.Connectors {
+	return p.ssdb
+}
+
+// Random 获取随机数
+func (p *Processor) Random() *rand.Rand {
+	return p.random
+}
+
+// Init 初始化
+func (p *Processor) Init() bool {
+	var err error
+	p.ssdb, err = gossdb.NewPool(&gossdb.Config{
+		Host:             "127.0.0.1",
+		Port:             8888,
+		MaxPoolSize:      50,
+		MinPoolSize:      5,
+		AcquireIncrement: 5,
+	})
+
+	if err != nil {
+		log.Println("gossdb.NewPool ", err)
+		return false
+	}
+
+	return true
+}
 
 // OnTimer 定时器到期
 func (p *Processor) OnTimer(tid int64, param interface{}) {
@@ -42,6 +78,7 @@ func PIns() *Processor {
 	if ins == nil {
 		ins = new(Processor)
 		ins.players = make(map[string]*Player)
+		ins.random = rand.New(rand.NewSource(time.Now().UnixNano()))
 	}
 
 	return ins

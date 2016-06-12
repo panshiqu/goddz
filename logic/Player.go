@@ -1,14 +1,17 @@
 package logic
 
 import (
+	"log"
 	"strings"
-	"wechat"
+
+	"github.com/panshiqu/goddz/wechat"
 )
 
 // Player 玩家
 type Player struct {
 	progress int
 	openid   string
+	key      string
 	mine     []string
 	rival    []string
 }
@@ -61,5 +64,41 @@ func (p *Player) OnEvent(message string) {
 
 		// 发送场景
 		wechat.PushTextMessage(p.openid, strings.Join([]string{mine, rival, "请出牌..."}, "\n"))
+	default:
+		// 关键字
+		p.key += message
+
+		// 获取连接
+		c, err := PIns().SsdbPool().NewClient()
+		if err != nil {
+			log.Fatal("gossdb.NewClient ", err)
+		}
+
+		// 释放资源
+		defer c.Close()
+
+		// 响应数量
+		size, err := c.Qsize(p.key)
+		if err != nil {
+			log.Fatal("gossdb.Qsize ", err)
+		}
+
+		// 非法输入
+		if size == 0 {
+			wechat.PushTextMessage(p.openid, "非法输入，请出牌...")
+			return
+		}
+
+		// 获取机器操作
+		re, err := c.Qget(p.key, PIns().Random().Int63n(size))
+		if err != nil {
+			log.Fatal("gossdb.Qget ", err)
+		}
+
+		// 通知用户机器出牌
+		wechat.PushTextMessage(p.openid, re.String())
+
+		// 通知场景
+		p.OnEvent("run fast")
 	}
 }

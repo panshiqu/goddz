@@ -1,19 +1,20 @@
 package main
 
 import (
-	"base"
 	"crypto/sha1"
 	"encoding/xml"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
-	"logic"
 	"net/http"
 	"sort"
 	"strings"
 	"time"
-	"wechat"
+
+	"github.com/panshiqu/goddz/base"
+	"github.com/panshiqu/goddz/logic"
+	"github.com/panshiqu/goddz/wechat"
 )
 
 const (
@@ -120,6 +121,11 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Println("start")
+
+	// SSDBPOOL
+	if !logic.PIns().Init() {
+		log.Fatal("logic.PIns.Init failed")
+	}
 
 	// 定期刷新
 	wechat.ATIns().Refresh()
