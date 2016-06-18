@@ -94,7 +94,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		log.Println(requestBody)
+		//log.Println(requestBody)
 
 		go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
 
@@ -106,7 +106,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			Content:      value2CDATA(""),
 		}
 
-		log.Println(responseBody)
+		//log.Println(responseBody)
 
 		text, err := xml.MarshalIndent(responseBody, " ", "  ")
 		if err != nil {
