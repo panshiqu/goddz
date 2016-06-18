@@ -113,6 +113,12 @@ func (p *Player) OnEvent(message string) {
 			return
 		}
 
+		// 非法输入
+		if !isContains(p.mine, message) {
+			wechat.PushTextMessage(p.openid, "非法输入，请出牌...")
+			return
+		}
+
 		// 关键字
 		p.key += message
 
@@ -134,6 +140,7 @@ func (p *Player) OnEvent(message string) {
 		// 非法输入
 		if size == 0 {
 			wechat.PushTextMessage(p.openid, "非法输入，请出牌...")
+			p.key = p.key[:len(p.key)-1]
 			return
 		}
 
@@ -142,6 +149,9 @@ func (p *Player) OnEvent(message string) {
 		if err != nil {
 			log.Fatal("gossdb.Qget ", err)
 		}
+
+		// 关键字
+		p.key += re.String()
 
 		// 通知用户机器出牌
 		wechat.PushTextMessage(p.openid, re.String())
@@ -167,4 +177,14 @@ func (p *Player) OnEvent(message string) {
 		// 通知场景
 		p.OnEvent("run fast")
 	}
+}
+
+func isContains(s []string, e string) bool {
+	for _, v := range s {
+		if v == e {
+			return true
+		}
+	}
+
+	return false
 }
