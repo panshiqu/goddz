@@ -21,6 +21,23 @@ const (
 	token = "panshiqu"
 )
 
+// RequestBody 请求
+type RequestBody struct {
+	XMLName xml.Name `xml:"xml"`
+	MsgType string
+}
+
+// MenuRequestBody 文本请求
+type MenuRequestBody struct {
+	XMLName      xml.Name `xml:"xml"`
+	ToUserName   string
+	FromUserName string
+	CreateTime   time.Duration
+	MsgType      string
+	Event        string
+	EventKey     string
+}
+
 // TextRequestBody 文本请求
 type TextRequestBody struct {
 	XMLName      xml.Name `xml:"xml"`
@@ -88,34 +105,53 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		requestBody := &TextRequestBody{}
-		if err := xml.Unmarshal(body, requestBody); err != nil {
+		requestType := &RequestBody{}
+		if err := xml.Unmarshal(body, requestType); err != nil {
 			log.Fatal("xml.Unmarshal failed ", err)
 			return
 		}
 
-		//log.Println(requestBody)
+		if strings.ToUpper(requestType.MsgType) == "TEXT" {
+			requestBody := &TextRequestBody{}
+			if err := xml.Unmarshal(body, requestBody); err != nil {
+				log.Fatal("xml.Unmarshal failed ", err)
+				return
+			}
 
-		go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
+			//log.Println(requestBody)
 
-		responseBody := &TextResponseBody{
-			ToUserName:   value2CDATA(requestBody.FromUserName),
-			FromUserName: value2CDATA(requestBody.ToUserName),
-			CreateTime:   time.Duration(time.Now().Unix()),
-			MsgType:      value2CDATA("text"),
-			Content:      value2CDATA(""),
+			go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
+
+			responseBody := &TextResponseBody{
+				ToUserName:   value2CDATA(requestBody.FromUserName),
+				FromUserName: value2CDATA(requestBody.ToUserName),
+				CreateTime:   time.Duration(time.Now().Unix()),
+				MsgType:      value2CDATA("text"),
+				Content:      value2CDATA(""),
+			}
+
+			//log.Println(responseBody)
+
+			text, err := xml.MarshalIndent(responseBody, " ", "  ")
+			if err != nil {
+				log.Fatal("xml.MarshalIndent failed ", err)
+				return
+			}
+
+			w.Header().Set("Content-Type", "text/xml")
+			fmt.Fprintf(w, "success")
+			_ = string(text)
+		} else if strings.ToUpper(requestType.MsgType) == "EVENT" {
+			requestBody := &MenuRequestBody{}
+			if err := xml.Unmarshal(body, requestBody); err != nil {
+				log.Fatal("xml.Unmarshal failed ", err)
+				return
+			}
+
+			//log.Println(requestBody)
+
+			logic.PIns().OnEvent(requestBody.FromUserName, requestBody.EventKey)
 		}
-
-		//log.Println(responseBody)
-
-		text, err := xml.MarshalIndent(responseBody, " ", "  ")
-		if err != nil {
-			log.Fatal("xml.MarshalIndent failed ", err)
-			return
-		}
-
-		w.Header().Set("Content-Type", "text/xml")
-		fmt.Fprintf(w, string(text))
 	}
 }
 
@@ -131,6 +167,9 @@ func main() {
 	wechat.ATIns().Refresh()
 	base.TMIns().AddTimer(1, time.Duration(time.Hour), true, nil)
 	base.TMIns().AddTimer(2, time.Duration(10*time.Second), false, nil)
+
+	// 创建菜单
+	wechat.CreateCustomMenu()
 
 	// 开启服务
 	http.HandleFunc("/", procRequest)

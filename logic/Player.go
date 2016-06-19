@@ -77,7 +77,9 @@ func (p *Player) Init() {
 // OnEvent 事件到来
 func (p *Player) OnEvent(message string) {
 	switch message {
-	case "run fast":
+	case "run fast game guide":
+		wechat.PushTextMessage(p.openid, "游戏说明：\n你拥有优先出牌的权利\n你与机器人拥有指定手牌\n先出完手牌的玩家赢得本轮胜利")
+	case "run fast start game":
 		// 初始化游戏
 		if p.progress == 0 {
 			p.progress = 1
@@ -90,12 +92,12 @@ func (p *Player) OnEvent(message string) {
 
 		// 发送场景
 		wechat.PushTextMessage(p.openid, strings.Join([]string{mine, rival, "请出牌..."}, "\n"))
-	case "re start":
+	case "run fast re start":
 		// 初始化
 		p.Init()
 
 		// 发送场景
-		p.OnEvent("run fast")
+		p.OnEvent("run fast start game")
 	default:
 		// 输赢判断
 		if len(p.mine) == 1 && p.mine[0] == message {
@@ -108,7 +110,7 @@ func (p *Player) OnEvent(message string) {
 			p.Init()
 
 			// 发送场景
-			p.OnEvent("run fast")
+			p.OnEvent("run fast start game")
 
 			return
 		}
@@ -169,6 +171,6 @@ func (p *Player) OnEvent(message string) {
 		}
 
 		// 通知场景
-		p.OnEvent("run fast")
+		p.OnEvent("run fast start game")
 	}
 }
