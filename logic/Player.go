@@ -106,7 +106,7 @@ func (p *Player) OnEvent(message string) {
 		// 发送场景
 		p.OnEvent("run fast start game")
 	default:
-		p.game.OnGameEvent(message)
+		wechat.PushTextMessage(p.openid, p.game.OnGameEvent(message))
 		return
 
 		// 输赢判断
