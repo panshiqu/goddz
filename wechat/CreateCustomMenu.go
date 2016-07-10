@@ -14,9 +14,19 @@ const (
 var menu = []byte(`{
     "button": [
         {
-            "type": "click",
-            "name": "残局",
-            "key": "can ju"
+            "name": "过河",
+            "sub_button": [
+                {
+                    "type": "click",
+                    "name": "开始游戏",
+                    "key": "cross river start game"
+                },
+                {
+                    "type": "click",
+                    "name": "游戏说明",
+                    "key": "cross river game guide"
+                }
+            ]
         },
         {
             "name": "跑得快",

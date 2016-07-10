@@ -62,7 +62,7 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 func (p *Processor) OnEvent(user string, message string) {
 	// 自定义菜单
 	if message == "can ju" {
-		wechat.PushTextMessage(user, "敬请期待")
+		wechat.PushTextMessage(user, "敬请期待")
 		return
 	} else if message == "contact us" {
 		wechat.PushTextMessage(user, "联系电话：13526535277")

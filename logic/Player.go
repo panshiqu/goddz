@@ -14,6 +14,7 @@ type Player struct {
 	key      string
 	mine     []string
 	rival    []string
+	game     *Game1001
 }
 
 // GetProgress 获取进度
@@ -77,6 +78,12 @@ func (p *Player) Init() {
 // OnEvent 事件到来
 func (p *Player) OnEvent(message string) {
 	switch message {
+	case "cross river game guide":
+		game := new(Game1001)
+		wechat.PushTextMessage(p.openid, game.Description())
+	case "cross river start game":
+		p.game = new(Game1001)
+		wechat.PushTextMessage(p.openid, p.game.OnGameStart())
 	case "run fast game guide":
 		wechat.PushTextMessage(p.openid, "游戏说明：\n你拥有优先出牌的权利\n你与机器人拥有指定手牌\n先出完手牌的玩家赢得本轮胜利")
 	case "run fast start game":
@@ -99,6 +106,9 @@ func (p *Player) OnEvent(message string) {
 		// 发送场景
 		p.OnEvent("run fast start game")
 	default:
+		p.game.OnGameEvent(message)
+		return
+
 		// 输赢判断
 		if len(p.mine) == 1 && p.mine[0] == message {
 			wechat.PushTextMessage(p.openid, "恭喜你，你赢了")
