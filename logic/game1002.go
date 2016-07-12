@@ -3,44 +3,40 @@ package logic
 import "strings"
 
 const (
-	// Cabbage 卷心菜
-	Cabbage int = 1
+	// Person 人
+	Person int = 1
 
-	// Sheep 小羊
-	Sheep int = 2
-
-	// Wolf 狼
-	Wolf int = 3
+	// Ghost 鬼
+	Ghost int = 2
 )
 
-// Game1001 游戏
-type Game1001 struct {
+// Game1002 游戏
+type Game1002 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
-	race    map[int]int    // 竞争
 	side    bool           // 位置
 	cap     int            // 容量
 }
 
 // Description 描述
-func (g *Game1001) Description() string {
-	return `把卷心菜、小羊、狼运到对岸
-注意人不在的时候小羊会吃掉卷心菜、狼会吃掉小羊
+func (g *Game1002) Description() string {
+	return `把人、鬼运到对岸
+注意鬼比人多的时候鬼将吃人
 操作：装(1)、卸(2)、过河(3)
-货物：卷心菜(1)、小羊(2)、狼(3)
+货物：人(1)、鬼(2)
 
 示范：
 操作货物之间点号分隔
-装狼上船请输入：装。狼 或 1.3
-卸狼下船请输入：卸。狼 或 2.3
+装人上船请输入：装。人 或 1.1
+卸人下船请输入：卸。人 或 2.1
 过河请输入：过河 或 3`
 }
 
 // OnGameEvent 游戏事件
-func (g *Game1001) OnGameEvent(event string) string {
+func (g *Game1002) OnGameEvent(event string) string {
 	var events []string
 	if strings.Contains(event, ".") {
 		events = strings.Split(event, ".")
@@ -103,6 +99,10 @@ func (g *Game1001) OnGameEvent(event string) string {
 
 		g.carry = append(g.carry[0:pos], g.carry[pos+1:]...)
 	case Go:
+		if len(g.carry) <= 0 {
+			return "无人驾驶"
+		}
+
 		left := g.left
 		right := g.right
 		side := !g.side
@@ -115,14 +115,14 @@ func (g *Game1001) OnGameEvent(event string) string {
 			}
 		}
 
-		if side {
-			if ok, k, v := g.RaceDetect(right); !ok {
-				return "右岸的" + g.mapping[k] + "被" + g.mapping[v] + "吃掉了"
-			}
-		} else {
-			if ok, k, v := g.RaceDetect(left); !ok {
-				return "左岸的" + g.mapping[k] + "被" + g.mapping[v] + "吃掉了"
-			}
+		lp := Count(left, Person)
+		if lp > 0 && Count(left, Ghost) > lp {
+			return "左岸的人被鬼吃掉了"
+		}
+
+		rp := Count(right, Person)
+		if rp > 0 && Count(right, Ghost) > rp {
+			return "右岸的人被鬼吃掉了"
 		}
 
 		g.left = left
@@ -138,33 +138,21 @@ func (g *Game1001) OnGameEvent(event string) string {
 	return g.GameScene()
 }
 
-// RaceDetect 竞争检测
-func (g *Game1001) RaceDetect(s []int) (bool, int, int) {
-	for k, v := range g.race {
-		if Contain(s, k) && Contain(s, v) {
-			return false, k, v
-		}
-	}
-
-	return true, 0, 0
-}
-
 // OnGameStart 游戏开始
-func (g *Game1001) OnGameStart() string {
-	g.left = []int{Cabbage, Sheep, Wolf}
+func (g *Game1002) OnGameStart() string {
+	g.left = []int{Person, Person, Person, Ghost, Ghost, Ghost}
 	g.right = []int{}
 	g.carry = []int{}
-	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
-	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf, "1": 1, "2": 2, "3": 3}
-	g.race = map[int]int{Cabbage: Sheep, Sheep: Wolf}
+	g.mapping = map[int]string{Person: "人", Ghost: "鬼"}
+	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "人": Person, "鬼": Ghost, "1": 1, "2": 2, "3": 3}
 	g.side = true
-	g.cap = 1
+	g.cap = 2
 
 	return g.GameScene()
 }
 
 // GameScene 游戏场景
-func (g *Game1001) GameScene() string {
+func (g *Game1002) GameScene() string {
 	scene := "左岸："
 	for k, v := range g.left {
 		scene += g.mapping[v]

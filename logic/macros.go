@@ -1,9 +1,12 @@
 package logic
 
 const (
-	// LeftSide 左岸
-	LeftSide int = 65534
+	// Put 装
+	Put int = 1
 
-	// RightSide 右岸
-	RightSide int = 65535
+	// Get 卸
+	Get int = 2
+
+	// Go 过河
+	Go int = 3
 )

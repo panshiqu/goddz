@@ -21,3 +21,15 @@ func Index(s []int, i int) int {
 
 	return -1
 }
+
+// Count 计算数量
+func Count(s []int, i int) int {
+	c := 0
+	for _, v := range s {
+		if v == i {
+			c++
+		}
+	}
+
+	return c
+}

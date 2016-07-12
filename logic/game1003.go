@@ -3,44 +3,54 @@ package logic
 import "strings"
 
 const (
-	// Cabbage 卷心菜
-	Cabbage int = 1
+	// Cop 警察
+	Cop int = 1
 
-	// Sheep 小羊
-	Sheep int = 2
+	// Pri 犯人
+	Pri int = 2
 
-	// Wolf 狼
-	Wolf int = 3
+	// Dad 爸爸
+	Dad int = 3
+
+	// Mom 妈妈
+	Mom int = 4
+
+	// Son 儿子
+	Son int = 5
+
+	// Dau 女儿
+	Dau int = 6
 )
 
-// Game1001 游戏
-type Game1001 struct {
+// Game1003 游戏
+type Game1003 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
-	race    map[int]int    // 竞争
 	side    bool           // 位置
 	cap     int            // 容量
 }
 
 // Description 描述
-func (g *Game1001) Description() string {
-	return `把卷心菜、小羊、狼运到对岸
-注意人不在的时候小羊会吃掉卷心菜、狼会吃掉小羊
+func (g *Game1003) Description() string {
+	return `一家六口人，爸爸、妈妈、两个儿子、两个女儿在旅行途中迷路，幸好遇见一名警察正在押解一名罪犯，无奈只能选择与警察同行寻找回家的路。现在他们需要通过一条河流，你能帮帮他们吗？
+注意：爸爸不在的时候，妈妈便会教训儿子
+注意：妈妈不在的时候，爸爸便会教训女儿
+注意：警察不在的时候，罪犯会伤害一家六口
 操作：装(1)、卸(2)、过河(3)
-货物：卷心菜(1)、小羊(2)、狼(3)
+货物：警察(1)、罪犯(2)、爸爸(3)、妈妈(4)、儿子(5)、女儿(6)
 
 示范：
 操作货物之间点号分隔
-装狼上船请输入：装。狼 或 1.3
-卸狼下船请输入：卸。狼 或 2.3
+装警察上船请输入：装。警察 或 1.1
+卸警察下船请输入：卸。警察 或 2.1
 过河请输入：过河 或 3`
 }
 
 // OnGameEvent 游戏事件
-func (g *Game1001) OnGameEvent(event string) string {
+func (g *Game1003) OnGameEvent(event string) string {
 	var events []string
 	if strings.Contains(event, ".") {
 		events = strings.Split(event, ".")
@@ -103,6 +113,14 @@ func (g *Game1001) OnGameEvent(event string) string {
 
 		g.carry = append(g.carry[0:pos], g.carry[pos+1:]...)
 	case Go:
+		if len(g.carry) <= 0 {
+			return "无人驾驶"
+		}
+
+		if !Contain(g.carry, Cop) && !Contain(g.carry, Dad) && !Contain(g.carry, Mom) {
+			return "无人会驾驶船"
+		}
+
 		left := g.left
 		right := g.right
 		side := !g.side
@@ -115,14 +133,28 @@ func (g *Game1001) OnGameEvent(event string) string {
 			}
 		}
 
-		if side {
-			if ok, k, v := g.RaceDetect(right); !ok {
-				return "右岸的" + g.mapping[k] + "被" + g.mapping[v] + "吃掉了"
-			}
-		} else {
-			if ok, k, v := g.RaceDetect(left); !ok {
-				return "左岸的" + g.mapping[k] + "被" + g.mapping[v] + "吃掉了"
-			}
+		if !Contain(g.left, Cop) && Contain(g.left, Pri) && len(g.left) > 1 {
+			return "左岸罪犯伤害家人"
+		}
+
+		if !Contain(g.left, Mom) && Contain(g.left, Dad) && Contain(g.left, Dau) {
+			return "左岸爸爸教训女儿"
+		}
+
+		if !Contain(g.left, Dad) && Contain(g.left, Mom) && Contain(g.left, Son) {
+			return "左岸妈妈教训儿子"
+		}
+
+		if !Contain(g.right, Cop) && Contain(g.right, Pri) && len(g.right) > 1 {
+			return "右岸罪犯伤害家人"
+		}
+
+		if !Contain(g.right, Mom) && Contain(g.right, Dad) && Contain(g.right, Dau) {
+			return "右岸爸爸教训女儿"
+		}
+
+		if !Contain(g.right, Dad) && Contain(g.right, Mom) && Contain(g.right, Son) {
+			return "右岸妈妈教训儿子"
 		}
 
 		g.left = left
@@ -138,33 +170,22 @@ func (g *Game1001) OnGameEvent(event string) string {
 	return g.GameScene()
 }
 
-// RaceDetect 竞争检测
-func (g *Game1001) RaceDetect(s []int) (bool, int, int) {
-	for k, v := range g.race {
-		if Contain(s, k) && Contain(s, v) {
-			return false, k, v
-		}
-	}
-
-	return true, 0, 0
-}
-
 // OnGameStart 游戏开始
-func (g *Game1001) OnGameStart() string {
-	g.left = []int{Cabbage, Sheep, Wolf}
+func (g *Game1003) OnGameStart() string {
+	g.left = []int{Cop, Pri, Dad, Mom, Son, Son, Dau, Dau}
 	g.right = []int{}
 	g.carry = []int{}
-	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
-	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf, "1": 1, "2": 2, "3": 3}
-	g.race = map[int]int{Cabbage: Sheep, Sheep: Wolf}
+	g.mapping = map[int]string{Cop: "警察", Pri: "罪犯", Dad: "爸爸", Mom: "妈妈", Son: "儿子", Dau: "女儿"}
+	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "警察": Cop, "罪犯": Pri, "爸爸": Dad,
+		"妈妈": Mom, "儿子": Son, "女儿": Dau, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6}
 	g.side = true
-	g.cap = 1
+	g.cap = 2
 
 	return g.GameScene()
 }
 
 // GameScene 游戏场景
-func (g *Game1001) GameScene() string {
+func (g *Game1003) GameScene() string {
 	scene := "左岸："
 	for k, v := range g.left {
 		scene += g.mapping[v]
