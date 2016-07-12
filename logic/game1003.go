@@ -39,6 +39,7 @@ func (g *Game1003) Description() string {
 注意：爸爸不在的时候，妈妈便会教训儿子
 注意：妈妈不在的时候，爸爸便会教训女儿
 注意：警察不在的时候，罪犯会伤害一家六口
+注意：船只能同时承载两个货物
 操作：装(1)、卸(2)、过河(3)
 货物：警察(1)、罪犯(2)、爸爸(3)、妈妈(4)、儿子(5)、女儿(6)
 
@@ -177,7 +178,8 @@ func (g *Game1003) OnGameStart() string {
 	g.carry = []int{}
 	g.mapping = map[int]string{Cop: "警察", Pri: "罪犯", Dad: "爸爸", Mom: "妈妈", Son: "儿子", Dau: "女儿"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "警察": Cop, "罪犯": Pri, "爸爸": Dad,
-		"妈妈": Mom, "儿子": Son, "女儿": Dau, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6}
+		"妈妈": Mom, "儿子": Son, "女儿": Dau, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,
+		"警": Cop, "犯": Pri, "爸": Dad, "妈": Mom, "儿": Son, "女": Dau}
 	g.side = true
 	g.cap = 2
 

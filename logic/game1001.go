@@ -28,7 +28,8 @@ type Game1001 struct {
 // Description 描述
 func (g *Game1001) Description() string {
 	return `把卷心菜、小羊、狼运到对岸
-注意人不在的时候小羊会吃掉卷心菜、狼会吃掉小羊
+注意：人不在的时候小羊会吃掉卷心菜、狼会吃掉小羊
+注意：船只能同时承载一个货物
 操作：装(1)、卸(2)、过河(3)
 货物：卷心菜(1)、小羊(2)、狼(3)
 
@@ -155,7 +156,8 @@ func (g *Game1001) OnGameStart() string {
 	g.right = []int{}
 	g.carry = []int{}
 	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
-	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf, "1": 1, "2": 2, "3": 3}
+	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf,
+		"1": 1, "2": 2, "3": 3, "菜": Cabbage, "羊": Sheep}
 	g.race = map[int]int{Cabbage: Sheep, Sheep: Wolf}
 	g.side = true
 	g.cap = 1

@@ -24,7 +24,8 @@ type Game1002 struct {
 // Description 描述
 func (g *Game1002) Description() string {
 	return `把人、鬼运到对岸
-注意鬼比人多的时候鬼将吃人
+注意：鬼比人多的时候鬼将吃人
+注意：船只能同时承载两个货物
 操作：装(1)、卸(2)、过河(3)
 货物：人(1)、鬼(2)
 
