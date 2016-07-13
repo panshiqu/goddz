@@ -27,7 +27,7 @@ type RequestBody struct {
 	MsgType string
 }
 
-// MenuRequestBody 文本请求
+// MenuRequestBody 菜单请求
 type MenuRequestBody struct {
 	XMLName      xml.Name `xml:"xml"`
 	ToUserName   string
