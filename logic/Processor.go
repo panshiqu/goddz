@@ -43,7 +43,7 @@ func (p *Processor) Init() bool {
 // OnTimer 定时器到期
 func (p *Processor) OnTimer(tid int64, param interface{}) {
 	switch tid {
-	case 1:
+	case RefreshTimer:
 		wechat.ATIns().Refresh()
 	}
 }
