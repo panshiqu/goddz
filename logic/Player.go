@@ -2,7 +2,9 @@ package logic
 
 import (
 	"log"
+	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/panshiqu/goddz/wechat"
 )
@@ -163,7 +165,8 @@ func (p *Player) OnEvent(message string) {
 		}
 
 		// 获取机器操作
-		re, err := c.Qget(p.key, PIns().Random().Int63n(size))
+		random := rand.New(rand.NewSource(time.Now().UnixNano()))
+		re, err := c.Qget(p.key, random.Int63n(size))
 		if err != nil {
 			log.Fatal("gossdb.Qget ", err)
 		}
