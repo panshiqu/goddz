@@ -21,6 +21,9 @@ func (p *Player) SetOpenID(v string) {
 
 // OnEvent 事件到来
 func (p *Player) OnEvent(message string) {
+	// 计数
+	p.cnt++
+
 	switch message {
 	// 过河1
 	case "1001":

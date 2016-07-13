@@ -52,14 +52,20 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 
 // OnEvent 事件到来
 func (p *Processor) OnEvent(user string, message string) {
-	// 查找用户
+	// 加锁
+	p.mutex.Lock()
+
+	// 查找玩家
 	player, ok := p.players[user]
 	if !ok {
-		// 创建用户
+		// 创建玩家
 		player = new(Player)
 		player.SetOpenID(user)
 		p.players[user] = player
 	}
+
+	// 解锁
+	p.mutex.Unlock()
 
 	// 通知事件
 	player.OnEvent(message)
