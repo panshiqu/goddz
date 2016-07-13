@@ -15,3 +15,8 @@ const (
 	// RefreshTimer 刷新
 	RefreshTimer int64 = 1
 )
+
+const (
+	// AdminOpenID 管理员
+	AdminOpenID string = "oilXLwUJYuhN9-ml2aq2yIMZFByo"
+)

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"log"
+	"sync"
 
 	"github.com/panshiqu/goddz/wechat"
 	"github.com/seefan/gossdb"
@@ -9,8 +10,9 @@ import (
 
 // Processor 处理器
 type Processor struct {
-	players map[string]*Player
-	ssdb    *gossdb.Connectors
+	ssdb    *gossdb.Connectors // SSDB
+	players map[string]*Player // 玩家
+	mutex   sync.Mutex         // 玩家锁
 }
 
 // 实例

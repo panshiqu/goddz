@@ -4,8 +4,9 @@ import "github.com/panshiqu/goddz/wechat"
 
 // Player 玩家
 type Player struct {
-	openid string
-	game   Game
+	openid string // 编号
+	game   Game   // 游戏
+	cnt    int    // 计数
 }
 
 // GetOpenID 获取微信编号

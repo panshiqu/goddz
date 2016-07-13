@@ -170,6 +170,9 @@ func main() {
 	// 定期刷新
 	base.TMIns().AddTimer(logic.RefreshTimer, time.Duration(time.Hour), true, nil)
 
+	// 通知管理
+	wechat.PushTextMessage(logic.AdminOpenID, "服务器启动成功")
+
 	// 创建菜单
 	wechat.CreateCustomMenu()
 
