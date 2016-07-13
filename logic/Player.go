@@ -34,6 +34,12 @@ func (p *Player) OnEvent(message string) {
 		p.game = new(Game1003)
 
 	default:
+		// 校验
+		if p.game == nil {
+			wechat.PushTextMessage(p.openid, "请先选择游戏")
+			return
+		}
+
 		// 游戏事件
 		wechat.PushTextMessage(p.openid, p.game.OnGameEvent(message))
 		return
