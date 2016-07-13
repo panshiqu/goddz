@@ -82,6 +82,7 @@ func (a *AccessToken) Refresh() {
 func ATIns() *AccessToken {
 	if ins == nil {
 		ins = new(AccessToken)
+		ins.Refresh()
 	}
 
 	return ins

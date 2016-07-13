@@ -45,8 +45,6 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 	switch tid {
 	case 1:
 		wechat.ATIns().Refresh()
-	case 2:
-		wechat.PushTextMessage("oilXLwUJYuhN9-ml2aq2yIMZFByo", "定时测试")
 	}
 }
 

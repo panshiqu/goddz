@@ -168,9 +168,7 @@ func main() {
 	}
 
 	// 定期刷新
-	wechat.ATIns().Refresh()
-	base.TMIns().AddTimer(1, time.Duration(time.Hour), true, nil)
-	base.TMIns().AddTimer(2, time.Duration(10*time.Second), false, nil)
+	base.TMIns().AddTimer(logic.RefreshTimer, time.Duration(time.Hour), true, nil)
 
 	// 创建菜单
 	wechat.CreateCustomMenu()

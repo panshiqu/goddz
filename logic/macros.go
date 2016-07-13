@@ -10,3 +10,8 @@ const (
 	// Go 过河
 	Go int = 3
 )
+
+const (
+	// RefreshTimer 刷新
+	RefreshTimer int64 = 1
+)
