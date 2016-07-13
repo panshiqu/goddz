@@ -19,6 +19,16 @@ func (p *Player) SetOpenID(v string) {
 	p.openid = v
 }
 
+// GetCnt 获取计数
+func (p *Player) GetCnt() int {
+	return p.cnt
+}
+
+// SetCnt 设置计数
+func (p *Player) SetCnt(v int) {
+	p.cnt = v
+}
+
 // OnEvent 事件到来
 func (p *Player) OnEvent(message string) {
 	// 计数

@@ -1,7 +1,9 @@
 package logic
 
 import (
+	"bytes"
 	"log"
+	"strconv"
 	"sync"
 
 	"github.com/panshiqu/goddz/wechat"
@@ -52,6 +54,24 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 
 // OnEvent 事件到来
 func (p *Processor) OnEvent(user string, message string) {
+	// 运行状态
+	if user == AdminOpenID && message == "status" {
+		var buf bytes.Buffer
+
+		// 加锁
+		p.mutex.Lock()
+
+		for _, v := range p.players {
+			buf.WriteString(v.GetOpenID())
+			buf.WriteString(":")
+			buf.WriteString(strconv.Itoa(v.GetCnt()))
+			buf.WriteString("\n")
+		}
+
+		// 解锁
+		p.mutex.Unlock()
+	}
+
 	// 加锁
 	p.mutex.Lock()
 
