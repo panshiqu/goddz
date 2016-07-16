@@ -72,6 +72,7 @@ func (p *Processor) OnEvent(user string, message string) {
 
 		buf.WriteString("Total:")
 		buf.WriteString(strconv.Itoa(total))
+		wechat.PushTextMessage(user, buf.String())
 
 		// 解锁
 		p.mutex.Unlock()
