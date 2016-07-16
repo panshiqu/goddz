@@ -56,6 +56,7 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 func (p *Processor) OnEvent(user string, message string) {
 	// 运行状态
 	if user == AdminOpenID && message == "status" {
+		var total int
 		var buf bytes.Buffer
 
 		// 加锁
@@ -66,10 +67,16 @@ func (p *Processor) OnEvent(user string, message string) {
 			buf.WriteString(":")
 			buf.WriteString(strconv.Itoa(v.GetCnt()))
 			buf.WriteString("\n")
+			total += v.GetCnt()
 		}
+
+		buf.WriteString("Total:")
+		buf.WriteString(strconv.Itoa(total))
 
 		// 解锁
 		p.mutex.Unlock()
+
+		return
 	}
 
 	// 加锁
