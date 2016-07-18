@@ -163,9 +163,9 @@ func main() {
 	log.Println("start")
 
 	// SSDBPOOL
-	if !logic.PIns().Init() {
-		log.Fatal("logic.PIns.Init failed")
-	}
+	// if !logic.PIns().Init() {
+	// 	log.Fatal("logic.PIns.Init failed")
+	// }
 
 	// 定期刷新
 	base.TMIns().AddTimer(logic.RefreshTimer, time.Duration(time.Hour), true, nil)

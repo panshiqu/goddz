@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	appID               = "wx8c190a9ee7a26787"
-	appSecret           = "a9caec35a7a53b653d7994ade9a70292"
+	appID               = "wx45361df884eeaf8d"
+	appSecret           = "07ac79d826d61af202659ffc2f726aa1"
 	accessTokenFetchURL = "https://api.weixin.qq.com/cgi-bin/token"
 )
 

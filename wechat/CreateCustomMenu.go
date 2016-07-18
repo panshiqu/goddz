@@ -14,19 +14,29 @@ const (
 var menu = []byte(`{
     "button": [
         {
-            "type": "click",
-            "name": "过河1",
-            "key": "1001"
+            "name": "过河",
+            "sub_button": [
+                {
+                    "type": "click",
+                    "name": "过河1",
+                    "key": "1001"
+                },
+                {
+                    "type": "click",
+                    "name": "过河2",
+                    "key": "1002"
+                },
+                {
+                    "type": "click",
+                    "name": "过河3",
+                    "key": "1003"
+                }
+            ]
         },
         {
             "type": "click",
-            "name": "过河2",
-            "key": "1002"
-        },
-        {
-            "type": "click",
-            "name": "过河3",
-            "key": "1003"
+            "name": "过桥",
+            "key": "1004"
         }
     ]
 }`)
