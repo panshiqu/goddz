@@ -150,10 +150,13 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 			log.Println("#Recv:", requestBody)
 
-			if strings.ToUpper(requestBody.Event) == "CLICK" {
+			event := strings.ToUpper(requestBody.Event)
+			if event == "SCAN" {
+				go logic.PIns().OnScan(requestBody.FromUserName, requestBody.EventKey)
+			} else if event == "CLICK" {
 				go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.EventKey)
-			} else if strings.ToUpper(requestBody.Event) == "SUBSCRIBE" {
-				wechat.PushTextMessage(requestBody.FromUserName, "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战")
+			} else if event == "SUBSCRIBE" {
+				go logic.PIns().OnSubscribe(requestBody.FromUserName, requestBody.EventKey)
 			}
 		}
 	}

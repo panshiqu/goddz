@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/panshiqu/goddz/wechat"
@@ -49,6 +50,15 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 	switch tid {
 	case RefreshTimer:
 		wechat.ATIns().Refresh()
+	}
+}
+
+// OnScan 扫描到来
+func (p *Processor) OnScan(user string, message string) {
+	switch message {
+	// 睢县公园
+	case "SuiXian Park":
+		log.Println("SuiXian Park")
 	}
 }
 
@@ -105,6 +115,17 @@ func (p *Processor) OnEvent(user string, message string) {
 
 	// 通知事件
 	player.OnEvent(message)
+}
+
+// OnSubscribe 订阅到来
+func (p *Processor) OnSubscribe(user string, message string) {
+	wechat.PushTextMessage(user, "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战")
+
+	// 未关注扫描带参数二维码
+	switch strings.TrimLeft(message, "qrscene_") {
+	case "SuiXian Park":
+		log.Println("SuiXian Park")
+	}
 }
 
 // PIns 单例模式
