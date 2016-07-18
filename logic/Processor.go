@@ -60,6 +60,7 @@ func (p *Processor) OnEvent(user string, message string) {
 		// 手动刷新
 		case "refresh":
 			wechat.ATIns().Refresh()
+			return
 
 		// 运行状态
 		case "status":
@@ -83,9 +84,8 @@ func (p *Processor) OnEvent(user string, message string) {
 
 			// 解锁
 			p.mutex.Unlock()
+			return
 		}
-
-		return
 	}
 
 	// 加锁
