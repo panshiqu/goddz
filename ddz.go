@@ -118,7 +118,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			log.Println(requestBody)
+			log.Println("#Recv:", requestBody)
 
 			go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
 
@@ -148,7 +148,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			log.Println(requestBody)
+			log.Println("#Recv:", requestBody)
 
 			if strings.ToUpper(requestBody.Event) == "CLICK" {
 				go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.EventKey)

@@ -54,28 +54,36 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 
 // OnEvent 事件到来
 func (p *Processor) OnEvent(user string, message string) {
-	// 运行状态
-	if user == AdminOpenID && message == "status" {
-		var total int
-		var buf bytes.Buffer
+	// 管理者
+	if user == AdminOpenID {
+		switch message {
+		// 手动刷新
+		case "refresh":
+			wechat.ATIns().Refresh()
 
-		// 加锁
-		p.mutex.Lock()
+		// 运行状态
+		case "status":
+			var total int
+			var buf bytes.Buffer
 
-		for _, v := range p.players {
-			buf.WriteString(v.GetOpenID())
-			buf.WriteString(":")
-			buf.WriteString(strconv.Itoa(v.GetCnt()))
-			buf.WriteString("\n")
-			total += v.GetCnt()
+			// 加锁
+			p.mutex.Lock()
+
+			for _, v := range p.players {
+				buf.WriteString(v.GetOpenID())
+				buf.WriteString(":")
+				buf.WriteString(strconv.Itoa(v.GetCnt()))
+				buf.WriteString("\n")
+				total += v.GetCnt()
+			}
+
+			buf.WriteString("Total:")
+			buf.WriteString(strconv.Itoa(total))
+			wechat.PushTextMessage(user, buf.String())
+
+			// 解锁
+			p.mutex.Unlock()
 		}
-
-		buf.WriteString("Total:")
-		buf.WriteString(strconv.Itoa(total))
-		wechat.PushTextMessage(user, buf.String())
-
-		// 解锁
-		p.mutex.Unlock()
 
 		return
 	}

@@ -3,6 +3,7 @@ package wechat
 import (
 	"bytes"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
@@ -51,4 +52,11 @@ func PushTextMessage(user string, message string) {
 	if err != nil {
 		log.Fatal("http.Client.Do failed ", err)
 	}
+
+	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal("ioutil.ReadAll failed ", err)
+	}
+
+	log.Println("#Send:", csm, string(body))
 }
