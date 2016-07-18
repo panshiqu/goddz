@@ -121,8 +121,8 @@ func (p *Processor) OnEvent(user string, message string) {
 func (p *Processor) OnSubscribe(user string, message string) {
 	wechat.PushTextMessage(user, "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战")
 
-	// 未关注扫描带参数二维码
 	switch strings.TrimLeft(message, "qrscene_") {
+	// 睢县公园
 	case "SuiXian Park":
 		log.Println("SuiXian Park")
 	}
