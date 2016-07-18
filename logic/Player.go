@@ -47,6 +47,10 @@ func (p *Player) OnEvent(message string) {
 	case "1003":
 		p.game = new(Game1003)
 
+	// 过桥
+	case "1004":
+		p.game = new(Game1004)
+
 	default:
 		// 校验
 		if p.game == nil {

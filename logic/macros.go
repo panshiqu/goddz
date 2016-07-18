@@ -18,5 +18,5 @@ const (
 
 const (
 	// AdminOpenID 管理员
-	AdminOpenID string = "oilXLwUJYuhN9-ml2aq2yIMZFByo"
+	AdminOpenID string = "o0qWoxE_BrLlGqXE2wJU7SZ01lh0"
 )
