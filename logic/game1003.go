@@ -195,10 +195,10 @@ func (g *Game1003) OnGameStart() string {
 	g.left = []int{Cop, Pri, Dad, Mom, Son, Son, Dau, Dau}
 	g.right = []int{}
 	g.carry = []int{}
-	g.voice = map[string]KV{"过河": {3, 0}, "装警察": {1, 1}, "装罪犯": {1, 2}, "装爸爸": {1, 3}, "装妈妈": {1, 4}, "装儿子": {1, 5}, "装女儿": {1, 6},
-		"装警": {1, 1}, "装犯": {1, 2}, "装爸": {1, 3}, "装妈": {1, 4}, "装儿": {1, 5}, "装女": {1, 6},
-		"卸警察": {2, 1}, "卸罪犯": {2, 2}, "卸爸爸": {2, 3}, "卸妈妈": {2, 4}, "卸儿子": {2, 5}, "卸女儿": {2, 6},
-		"卸警": {2, 1}, "卸犯": {2, 2}, "卸爸": {2, 3}, "卸妈": {2, 4}, "卸儿": {2, 5}, "卸女": {2, 6}}
+	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangjingcha": {1, 1}, "zhuangzuifan": {1, 2}, "zhuangbaba": {1, 3}, "zhuangmama": {1, 4}, "zhuangerzi": {1, 5}, "zhuangnver": {1, 6},
+		"zhuangjing": {1, 1}, "zhuangfan": {1, 2}, "zhuangba": {1, 3}, "zhuangma": {1, 4}, "zhuanger": {1, 5}, "zhuangnv": {1, 6},
+		"xiejingcha": {2, 1}, "xiezuifan": {2, 2}, "xiebaba": {2, 3}, "xiemama": {2, 4}, "xieerzi": {2, 5}, "xienver": {2, 6},
+		"xiejing": {2, 1}, "xiefan": {2, 2}, "xieba": {2, 3}, "xiema": {2, 4}, "xieer": {2, 5}, "xienv": {2, 6}}
 	g.mapping = map[int]string{Cop: "警察", Pri: "罪犯", Dad: "爸爸", Mom: "妈妈", Son: "儿子", Dau: "女儿"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "警察": Cop, "罪犯": Pri, "爸爸": Dad,
 		"妈妈": Mom, "儿子": Son, "女儿": Dau, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,

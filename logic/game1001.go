@@ -171,8 +171,8 @@ func (g *Game1001) OnGameStart() string {
 	g.left = []int{Cabbage, Sheep, Wolf}
 	g.right = []int{}
 	g.carry = []int{}
-	g.voice = map[string]KV{"过河": {3, 0}, "装卷心菜": {1, 1}, "装小羊": {1, 2}, "装狼": {1, 3}, "装菜": {1, 1},
-		"装羊": {1, 2}, "卸卷心菜": {2, 1}, "卸小羊": {2, 2}, "卸狼": {2, 3}, "卸菜": {2, 1}, "卸羊": {2, 2}}
+	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangjuanxincai": {1, 1}, "zhuangxiaoyang": {1, 2}, "zhuanglang": {1, 3}, "zhuangcai": {1, 1},
+		"zhuangyang": {1, 2}, "xiejuanxincai": {2, 1}, "xiexiaoyang": {2, 2}, "xielang": {2, 3}, "xiecai": {2, 1}, "xieyang": {2, 2}}
 	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf,
 		"1": 1, "2": 2, "3": 3, "菜": Cabbage, "羊": Sheep}

@@ -180,10 +180,10 @@ func (g *Game1004) OnGameStart() string {
 	g.left = []int{Person1, Person3, Person6, Person8, Person12}
 	g.right = []int{}
 	g.carry = []int{}
-	g.voice = map[string]KV{"过桥": {3, 0}, "装哥哥": {1, 1}, "装弟弟": {1, 2}, "装妈妈": {1, 3}, "装爸爸": {1, 4}, "装爷爷": {1, 5},
-		"装哥": {1, 1}, "装弟": {1, 2}, "装妈": {1, 3}, "装爸": {1, 4}, "装爷": {1, 5},
-		"卸哥哥": {2, 1}, "卸弟弟": {2, 2}, "卸妈妈": {2, 3}, "卸爸爸": {2, 4}, "卸爷爷": {2, 5},
-		"卸哥": {2, 1}, "卸弟": {2, 2}, "卸妈": {2, 3}, "卸爸": {2, 4}, "卸爷": {2, 5}}
+	g.voice = map[string]KV{"guoqiao": {3, 0}, "zhuanggege": {1, 1}, "zhuangdidi": {1, 2}, "zhuangmama": {1, 3}, "zhuangbaba": {1, 4}, "zhuangyeye": {1, 5},
+		"zhuangge": {1, 1}, "zhuangdi": {1, 2}, "zhuangma": {1, 3}, "zhuangba": {1, 4}, "zhuangye": {1, 5},
+		"xiegege": {2, 1}, "xiedidi": {2, 2}, "xiemama": {2, 3}, "xiebaba": {2, 4}, "xieyeye": {2, 5},
+		"xiege": {2, 1}, "xiedi": {2, 2}, "xiema": {2, 3}, "xieba": {2, 4}, "xieye": {2, 5}}
 	g.mapping = map[int]string{Person1: "哥哥", Person3: "弟弟", Person6: "妈妈", Person8: "爸爸", Person12: "爷爷"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过桥": Go, "哥哥": Person1, "弟弟": Person3, "妈妈": Person6, "爸爸": Person8, "爷爷": Person12,
 		"1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "哥": Person1, "弟": Person3, "妈": Person6, "爸": Person8, "爷": Person12}

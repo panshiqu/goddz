@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mozillazg/go-pinyin"
 	"github.com/panshiqu/goddz/base"
 	"github.com/panshiqu/goddz/logic"
 	"github.com/panshiqu/goddz/wechat"
@@ -192,9 +193,15 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				return false
 			})
 
-			wechat.PushTextMessage(requestBody.FromUserName, "识别结果："+reco)
+			var trans string
+			a := pinyin.NewArgs()
+			for _, v := range pinyin.Pinyin(reco, a) {
+				trans += strings.Join(v, "")
+			}
 
-			go logic.PIns().OnEvent(requestBody.FromUserName, reco)
+			wechat.PushTextMessage(requestBody.FromUserName, "识别结果："+trans)
+
+			go logic.PIns().OnEvent(requestBody.FromUserName, trans)
 
 			w.Header().Set("Content-Type", "text/xml")
 			fmt.Fprintf(w, "success")

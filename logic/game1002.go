@@ -159,7 +159,7 @@ func (g *Game1002) OnGameStart() string {
 	g.left = []int{Person, Person, Person, Ghost, Ghost, Ghost}
 	g.right = []int{}
 	g.carry = []int{}
-	g.voice = map[string]KV{"过河": {3, 0}, "装人": {1, 1}, "装鬼": {1, 2}, "卸人": {2, 1}, "卸鬼": {2, 2}}
+	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangren": {1, 1}, "zhuanggui": {1, 2}, "xieren": {2, 1}, "xiegui": {2, 2}}
 	g.mapping = map[int]string{Person: "人", Ghost: "鬼"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "人": Person, "鬼": Ghost, "1": 1, "2": 2, "3": 3}
 	g.side = true
