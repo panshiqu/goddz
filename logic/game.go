@@ -2,7 +2,10 @@ package logic
 
 // Game 游戏
 type Game interface {
+	Background() string        // 背景
 	Description() string       // 描述
 	OnGameStart() string       // 游戏开始
 	OnGameEvent(string) string // 游戏事件
+	GameScene() string         // 场景
+	GameTips() string          // 提示
 }

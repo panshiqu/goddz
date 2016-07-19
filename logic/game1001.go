@@ -25,11 +25,14 @@ type Game1001 struct {
 	cap     int            // 容量
 }
 
+// Background 背景
+func (g *Game1001) Background() string {
+	return `农夫准备把卷心菜、小羊、狼运到河对岸的集市售卖，可是他只有一条仅能同时承载一个货物的小船，而且他不在的时候小羊会吃掉卷心菜、狼会吃掉小羊。假如你是他，你能成功将所有货物安全运到对岸吗？`
+}
+
 // Description 描述
 func (g *Game1001) Description() string {
-	return `农夫准备把卷心菜、小羊、狼运到河对岸的集市售卖，可是他只有一条仅能同时承载一个货物的小船，而且他不在的时候小羊会吃掉卷心菜、狼会吃掉小羊。假如你是他，你能成功将所有货物安全运到对岸吗？
-
-操作：装(1)、卸(2)、过河(3)
+	return `操作：装(1)、卸(2)、过河(3)
 货物：卷心菜(1)、小羊(2)、狼(3)
 货物支持简写：菜(1)、羊(2)
 
@@ -201,4 +204,9 @@ func (g *Game1001) GameScene() string {
 	scene += "，请输入"
 
 	return scene
+}
+
+// GameTips 提示
+func (g *Game1001) GameTips() string {
+	return "太简单，没有办法提示"
 }

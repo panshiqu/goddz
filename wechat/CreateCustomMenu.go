@@ -14,29 +14,54 @@ const (
 var menu = []byte(`{
     "button": [
         {
-            "name": "过河",
+            "name": "游戏列表",
             "sub_button": [
                 {
                     "type": "click",
-                    "name": "过河1",
+                    "name": "狼羊菜过河",
                     "key": "1001"
                 },
                 {
                     "type": "click",
-                    "name": "过河2",
+                    "name": "三人三鬼过河",
                     "key": "1002"
                 },
                 {
                     "type": "click",
-                    "name": "过河3",
+                    "name": "警犯一家人过河",
                     "key": "1003"
+                },
+                {
+                    "type": "click",
+                    "name": "一家人过独木桥",
+                    "key": "1004"
                 }
             ]
         },
         {
-            "type": "click",
-            "name": "过桥",
-            "key": "1004"
+            "name": "游戏信息",
+            "sub_button": [
+                {
+                    "type": "click",
+                    "name": "问题背景",
+                    "key": "qb"
+                },
+                {
+                    "type": "click",
+                    "name": "操作说明",
+                    "key": "oi"
+                },
+                {
+                    "type": "click",
+                    "name": "当前场景",
+                    "key": "cs"
+                },
+                {
+                    "type": "click",
+                    "name": "获取提示",
+                    "key": "tip"
+                }
+            ]
         }
     ]
 }`)

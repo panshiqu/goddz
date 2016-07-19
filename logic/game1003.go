@@ -33,16 +33,19 @@ type Game1003 struct {
 	cap     int            // 容量
 }
 
-// Description 描述
-func (g *Game1003) Description() string {
+// Background 背景
+func (g *Game1003) Background() string {
 	return `一家六口人，爸爸、妈妈、两个儿子、两个女儿在旅行途中迷路，幸好遇见一名警察正在押解一名罪犯，无奈只能选择与警察同行寻找回家的路。现在他们需要通过一条河流，你能帮帮他们吗？
 注意：船只能同时承载两个货物
 注意：只有爸爸、妈妈、警察可以开船
 注意：爸爸不在的时候，妈妈便会教训儿子
 注意：妈妈不在的时候，爸爸便会教训女儿
-注意：警察不在的时候，罪犯会伤害一家六口
+注意：警察不在的时候，罪犯会伤害一家六口`
+}
 
-操作：装(1)、卸(2)、过河(3)
+// Description 描述
+func (g *Game1003) Description() string {
+	return `操作：装(1)、卸(2)、过河(3)
 货物：警察(1)、罪犯(2)、爸爸(3)、妈妈(4)、儿子(5)、女儿(6)
 货物支持简写：警(1)、犯(2)、爸(3)、妈(4)、儿(5)、女(6)
 
@@ -225,4 +228,9 @@ func (g *Game1003) GameScene() string {
 	scene += "，请输入"
 
 	return scene
+}
+
+// GameTips 提示
+func (g *Game1003) GameTips() string {
+	return "太简单，没有办法提示"
 }

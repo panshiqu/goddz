@@ -35,19 +35,19 @@ func (p *Player) OnEvent(message string) {
 	p.cnt++
 
 	switch message {
-	// 过河1
+	// 狼羊菜过河
 	case "1001":
 		p.game = new(Game1001)
 
-	// 过河2
+	// 三人三鬼过河
 	case "1002":
 		p.game = new(Game1002)
 
-	// 过河3
+	// 警犯一家人过河
 	case "1003":
 		p.game = new(Game1003)
 
-	// 过桥
+	// 一家人过独木桥
 	case "1004":
 		p.game = new(Game1004)
 
@@ -58,12 +58,37 @@ func (p *Player) OnEvent(message string) {
 			return
 		}
 
+		switch message {
+		// 问题背景
+		case "qb":
+			wechat.PushTextMessage(p.openid, p.game.Background())
+			return
+
+		// 操作说明
+		case "oi":
+			wechat.PushTextMessage(p.openid, p.game.Description())
+			return
+
+		// 当前场景
+		case "cs":
+			wechat.PushTextMessage(p.openid, p.game.GameScene())
+			return
+
+		// 获取提示
+		case "tip":
+			wechat.PushTextMessage(p.openid, p.game.GameTips())
+			return
+		}
+
 		// 游戏事件
 		wechat.PushTextMessage(p.openid, p.game.OnGameEvent(message))
 		return
 	}
 
-	// 描述
+	// 问题背景
+	wechat.PushTextMessage(p.openid, p.game.Background())
+
+	// 操作说明
 	wechat.PushTextMessage(p.openid, p.game.Description())
 
 	// 游戏开始

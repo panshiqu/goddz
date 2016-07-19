@@ -21,11 +21,14 @@ type Game1002 struct {
 	cap     int            // 容量
 }
 
+// Background 背景
+func (g *Game1002) Background() string {
+	return `三人三鬼准备过河，人和鬼都会开船，可是岸边只有一条仅能同时承载两个货物的空船，而且鬼比人多的时候鬼将吃人。你能指导他们安全过河吗？`
+}
+
 // Description 描述
 func (g *Game1002) Description() string {
-	return `三人三鬼准备过河，人和鬼都会开船，可是岸边只有一条仅能同时承载两个货物的空船，而且鬼比人多的时候鬼将吃人。你能指导他们安全过河吗？
-
-操作：装(1)、卸(2)、过河(3)
+	return `操作：装(1)、卸(2)、过河(3)
 货物：人(1)、鬼(2)
 
 操作和货物之间用点号或空格分隔
@@ -187,4 +190,9 @@ func (g *Game1002) GameScene() string {
 	scene += "，请输入"
 
 	return scene
+}
+
+// GameTips 提示
+func (g *Game1002) GameTips() string {
+	return "太简单，没有办法提示"
 }
