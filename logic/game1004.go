@@ -46,7 +46,7 @@ func (g *Game1004) Description() string {
 家人：哥哥(1)、弟弟(2)、妈妈(3)、爸爸(4)、爷爷(5)
 家人支持简写：哥(1)、弟(2)、妈(3)、爸(4)、爷(5)
 
-操作和家人之间用点号分隔
+操作和家人之间用点号或空格分隔
 装哥哥上桥请输入：装。哥哥 或 1.1
 卸哥哥下桥请输入：卸。哥哥 或 2.1
 过桥请输入：过桥 或 3`
@@ -59,6 +59,8 @@ func (g *Game1004) OnGameEvent(event string) string {
 		events = strings.Split(event, ".")
 	} else if strings.Contains(event, "。") {
 		events = strings.Split(event, "。")
+	} else if strings.Contains(event, " ") {
+		events = strings.Split(event, " ")
 	} else {
 		events = []string{event}
 	}

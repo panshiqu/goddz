@@ -28,7 +28,7 @@ func (g *Game1002) Description() string {
 操作：装(1)、卸(2)、过河(3)
 货物：人(1)、鬼(2)
 
-操作和货物之间用点号分隔
+操作和货物之间用点号或空格分隔
 装人上船请输入：装。人 或 1.1
 卸人下船请输入：卸。人 或 2.1
 过河请输入：过河 或 3`
@@ -41,6 +41,8 @@ func (g *Game1002) OnGameEvent(event string) string {
 		events = strings.Split(event, ".")
 	} else if strings.Contains(event, "。") {
 		events = strings.Split(event, "。")
+	} else if strings.Contains(event, " ") {
+		events = strings.Split(event, " ")
 	} else {
 		events = []string{event}
 	}

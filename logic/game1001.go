@@ -33,7 +33,7 @@ func (g *Game1001) Description() string {
 货物：卷心菜(1)、小羊(2)、狼(3)
 货物支持简写：菜(1)、羊(2)
 
-操作和货物之间用点号分隔
+操作和货物之间用点号或空格分隔
 装狼上船请输入：装。狼 或 1.3
 卸狼下船请输入：卸。狼 或 2.3
 过河请输入：过河 或 3`
@@ -46,6 +46,8 @@ func (g *Game1001) OnGameEvent(event string) string {
 		events = strings.Split(event, ".")
 	} else if strings.Contains(event, "。") {
 		events = strings.Split(event, "。")
+	} else if strings.Contains(event, " ") {
+		events = strings.Split(event, " ")
 	} else {
 		events = []string{event}
 	}

@@ -46,7 +46,7 @@ func (g *Game1003) Description() string {
 货物：警察(1)、罪犯(2)、爸爸(3)、妈妈(4)、儿子(5)、女儿(6)
 货物支持简写：警(1)、犯(2)、爸(3)、妈(4)、儿(5)、女(6)
 
-操作和货物之间用点号分隔
+操作和货物之间用点号或空格分隔
 装警察上船请输入：装。警察 或 1.1
 卸警察下船请输入：卸。警察 或 2.1
 过河请输入：过河 或 3`
@@ -59,6 +59,8 @@ func (g *Game1003) OnGameEvent(event string) string {
 		events = strings.Split(event, ".")
 	} else if strings.Contains(event, "。") {
 		events = strings.Split(event, "。")
+	} else if strings.Contains(event, " ") {
+		events = strings.Split(event, " ")
 	} else {
 		events = []string{event}
 	}
