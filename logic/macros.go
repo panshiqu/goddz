@@ -20,3 +20,9 @@ const (
 	// AdminOpenID 管理员
 	AdminOpenID string = "o0qWoxE_BrLlGqXE2wJU7SZ01lh0"
 )
+
+// KV 简单结构
+type KV struct {
+	K int
+	V int
+}

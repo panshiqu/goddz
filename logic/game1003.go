@@ -27,6 +27,7 @@ type Game1003 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
 	side    bool           // 位置
@@ -57,26 +58,32 @@ func (g *Game1003) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1003) OnGameEvent(event string) string {
-	var events []string
-	if strings.Contains(event, ".") {
-		events = strings.Split(event, ".")
-	} else if strings.Contains(event, "。") {
-		events = strings.Split(event, "。")
-	} else if strings.Contains(event, " ") {
-		events = strings.Split(event, " ")
-	} else {
-		events = []string{event}
-	}
-
-	cmd, ok := g.name[events[0]]
-	if !ok || cmd < Put || cmd > Go {
-		return "非法操作"
-	}
-
+	var cmd int
 	var which int
-	if len(events) > 1 && cmd != Go {
-		if which, ok = g.name[events[1]]; !ok {
-			return "非法货物"
+	if kv, ok := g.voice[event]; ok {
+		cmd = kv.K
+		which = kv.V
+	} else {
+		var events []string
+		if strings.Contains(event, ".") {
+			events = strings.Split(event, ".")
+		} else if strings.Contains(event, "。") {
+			events = strings.Split(event, "。")
+		} else if strings.Contains(event, " ") {
+			events = strings.Split(event, " ")
+		} else {
+			events = []string{event}
+		}
+
+		cmd, ok = g.name[events[0]]
+		if !ok || cmd < Put || cmd > Go {
+			return "非法操作"
+		}
+
+		if len(events) > 1 && cmd != Go {
+			if which, ok = g.name[events[1]]; !ok {
+				return "非法货物"
+			}
 		}
 	}
 
@@ -183,6 +190,10 @@ func (g *Game1003) OnGameStart() string {
 	g.left = []int{Cop, Pri, Dad, Mom, Son, Son, Dau, Dau}
 	g.right = []int{}
 	g.carry = []int{}
+	g.voice = map[string]KV{"过河": {3, 0}, "装警察": {1, 1}, "装罪犯": {1, 2}, "装爸爸": {1, 3}, "装妈妈": {1, 4}, "装儿子": {1, 5}, "装女儿": {1, 6},
+		"装警": {1, 1}, "装犯": {1, 2}, "装爸": {1, 3}, "装妈": {1, 4}, "装儿": {1, 5}, "装女": {1, 6},
+		"卸警察": {2, 1}, "卸罪犯": {2, 2}, "卸爸爸": {2, 3}, "卸妈妈": {2, 4}, "卸儿子": {2, 5}, "卸女儿": {2, 6},
+		"卸警": {2, 1}, "卸犯": {2, 2}, "卸爸": {2, 3}, "卸妈": {2, 4}, "卸儿": {2, 5}, "卸女": {2, 6}}
 	g.mapping = map[int]string{Cop: "警察", Pri: "罪犯", Dad: "爸爸", Mom: "妈妈", Son: "儿子", Dau: "女儿"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "警察": Cop, "罪犯": Pri, "爸爸": Dad,
 		"妈妈": Mom, "儿子": Son, "女儿": Dau, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,

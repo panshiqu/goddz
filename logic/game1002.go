@@ -15,6 +15,7 @@ type Game1002 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
 	side    bool           // 位置
@@ -39,26 +40,32 @@ func (g *Game1002) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1002) OnGameEvent(event string) string {
-	var events []string
-	if strings.Contains(event, ".") {
-		events = strings.Split(event, ".")
-	} else if strings.Contains(event, "。") {
-		events = strings.Split(event, "。")
-	} else if strings.Contains(event, " ") {
-		events = strings.Split(event, " ")
-	} else {
-		events = []string{event}
-	}
-
-	cmd, ok := g.name[events[0]]
-	if !ok || cmd < Put || cmd > Go {
-		return "非法操作"
-	}
-
+	var cmd int
 	var which int
-	if len(events) > 1 && cmd != Go {
-		if which, ok = g.name[events[1]]; !ok {
-			return "非法货物"
+	if kv, ok := g.voice[event]; ok {
+		cmd = kv.K
+		which = kv.V
+	} else {
+		var events []string
+		if strings.Contains(event, ".") {
+			events = strings.Split(event, ".")
+		} else if strings.Contains(event, "。") {
+			events = strings.Split(event, "。")
+		} else if strings.Contains(event, " ") {
+			events = strings.Split(event, " ")
+		} else {
+			events = []string{event}
+		}
+
+		cmd, ok = g.name[events[0]]
+		if !ok || cmd < Put || cmd > Go {
+			return "非法操作"
+		}
+
+		if len(events) > 1 && cmd != Go {
+			if which, ok = g.name[events[1]]; !ok {
+				return "非法货物"
+			}
 		}
 	}
 
@@ -147,6 +154,7 @@ func (g *Game1002) OnGameStart() string {
 	g.left = []int{Person, Person, Person, Ghost, Ghost, Ghost}
 	g.right = []int{}
 	g.carry = []int{}
+	g.voice = map[string]KV{"过河": {3, 0}, "装人": {1, 1}, "装鬼": {1, 2}, "卸人": {2, 1}, "卸鬼": {2, 2}}
 	g.mapping = map[int]string{Person: "人", Ghost: "鬼"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "人": Person, "鬼": Ghost, "1": 1, "2": 2, "3": 3}
 	g.side = true

@@ -18,6 +18,7 @@ type Game1001 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
 	race    map[int]int    // 竞争
@@ -44,26 +45,32 @@ func (g *Game1001) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1001) OnGameEvent(event string) string {
-	var events []string
-	if strings.Contains(event, ".") {
-		events = strings.Split(event, ".")
-	} else if strings.Contains(event, "。") {
-		events = strings.Split(event, "。")
-	} else if strings.Contains(event, " ") {
-		events = strings.Split(event, " ")
-	} else {
-		events = []string{event}
-	}
-
-	cmd, ok := g.name[events[0]]
-	if !ok || cmd < Put || cmd > Go {
-		return "非法操作"
-	}
-
+	var cmd int
 	var which int
-	if len(events) > 1 && cmd != Go {
-		if which, ok = g.name[events[1]]; !ok {
-			return "非法货物"
+	if kv, ok := g.voice[event]; ok {
+		cmd = kv.K
+		which = kv.V
+	} else {
+		var events []string
+		if strings.Contains(event, ".") {
+			events = strings.Split(event, ".")
+		} else if strings.Contains(event, "。") {
+			events = strings.Split(event, "。")
+		} else if strings.Contains(event, " ") {
+			events = strings.Split(event, " ")
+		} else {
+			events = []string{event}
+		}
+
+		cmd, ok = g.name[events[0]]
+		if !ok || cmd < Put || cmd > Go {
+			return "非法操作"
+		}
+
+		if len(events) > 1 && cmd != Go {
+			if which, ok = g.name[events[1]]; !ok {
+				return "非法货物"
+			}
 		}
 	}
 
@@ -159,6 +166,8 @@ func (g *Game1001) OnGameStart() string {
 	g.left = []int{Cabbage, Sheep, Wolf}
 	g.right = []int{}
 	g.carry = []int{}
+	g.voice = map[string]KV{"过河": {3, 0}, "装卷心菜": {1, 1}, "装小羊": {1, 2}, "装狼": {1, 3}, "装菜": {1, 1},
+		"装羊": {1, 2}, "卸卷心菜": {2, 1}, "卸小羊": {2, 2}, "卸狼": {2, 3}, "卸菜": {2, 1}, "卸羊": {2, 2}}
 	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "卷心菜": Cabbage, "小羊": Sheep, "狼": Wolf,
 		"1": 1, "2": 2, "3": 3, "菜": Cabbage, "羊": Sheep}

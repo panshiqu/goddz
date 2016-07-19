@@ -30,6 +30,7 @@ type Game1004 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
 	need    map[int]int    // 需要
@@ -57,26 +58,32 @@ func (g *Game1004) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1004) OnGameEvent(event string) string {
-	var events []string
-	if strings.Contains(event, ".") {
-		events = strings.Split(event, ".")
-	} else if strings.Contains(event, "。") {
-		events = strings.Split(event, "。")
-	} else if strings.Contains(event, " ") {
-		events = strings.Split(event, " ")
-	} else {
-		events = []string{event}
-	}
-
-	cmd, ok := g.name[events[0]]
-	if !ok || cmd < Put || cmd > Go {
-		return "非法操作"
-	}
-
+	var cmd int
 	var which int
-	if len(events) > 1 && cmd != Go {
-		if which, ok = g.name[events[1]]; !ok {
-			return "非法家人"
+	if kv, ok := g.voice[event]; ok {
+		cmd = kv.K
+		which = kv.V
+	} else {
+		var events []string
+		if strings.Contains(event, ".") {
+			events = strings.Split(event, ".")
+		} else if strings.Contains(event, "。") {
+			events = strings.Split(event, "。")
+		} else if strings.Contains(event, " ") {
+			events = strings.Split(event, " ")
+		} else {
+			events = []string{event}
+		}
+
+		cmd, ok = g.name[events[0]]
+		if !ok || cmd < Put || cmd > Go {
+			return "非法操作"
+		}
+
+		if len(events) > 1 && cmd != Go {
+			if which, ok = g.name[events[1]]; !ok {
+				return "非法家人"
+			}
 		}
 	}
 
@@ -168,6 +175,10 @@ func (g *Game1004) OnGameStart() string {
 	g.left = []int{Person1, Person3, Person6, Person8, Person12}
 	g.right = []int{}
 	g.carry = []int{}
+	g.voice = map[string]KV{"过桥": {3, 0}, "装哥哥": {1, 1}, "装弟弟": {1, 2}, "装妈妈": {1, 3}, "装爸爸": {1, 4}, "装爷爷": {1, 5},
+		"装哥": {1, 1}, "装弟": {1, 2}, "装妈": {1, 3}, "装爸": {1, 4}, "装爷": {1, 5},
+		"卸哥哥": {2, 1}, "卸弟弟": {2, 2}, "卸妈妈": {2, 3}, "卸爸爸": {2, 4}, "卸爷爷": {2, 5},
+		"卸哥": {2, 1}, "卸弟": {2, 2}, "卸妈": {2, 3}, "卸爸": {2, 4}, "卸爷": {2, 5}}
 	g.mapping = map[int]string{Person1: "哥哥", Person3: "弟弟", Person6: "妈妈", Person8: "爸爸", Person12: "爷爷"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过桥": Go, "哥哥": Person1, "弟弟": Person3, "妈妈": Person6, "爸爸": Person8, "爷爷": Person12,
 		"1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "哥": Person1, "弟": Person3, "妈": Person6, "爸": Person8, "爷": Person12}

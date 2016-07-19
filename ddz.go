@@ -184,10 +184,20 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 			log.Println("#Recv:", requestBody)
 
+			reco := strings.TrimRightFunc(requestBody.Recognition, func(v rune) bool {
+				if v == '！' {
+					return true
+				}
+
+				return false
+			})
+
+			wechat.PushTextMessage(requestBody.FromUserName, "识别结果："+reco)
+
+			go logic.PIns().OnEvent(requestBody.FromUserName, reco)
+
 			w.Header().Set("Content-Type", "text/xml")
 			fmt.Fprintf(w, "success")
-
-			wechat.PushTextMessage(requestBody.FromUserName, requestBody.Recognition)
 		}
 	}
 }
