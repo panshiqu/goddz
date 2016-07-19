@@ -49,6 +49,19 @@ type TextRequestBody struct {
 	MsgID        int
 }
 
+// VoiceRequestBody 语音请求
+type VoiceRequestBody struct {
+	XMLName      xml.Name `xml:"xml"`
+	ToUserName   string
+	FromUserName string
+	CreateTime   time.Duration
+	MsgType      string
+	MediaId      string
+	Format       string
+	Recognition  string
+	MsgID        int
+}
+
 // TextResponseBody 文本响应
 type TextResponseBody struct {
 	XMLName      xml.Name `xml:"xml"`
@@ -111,7 +124,8 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if strings.ToUpper(requestType.MsgType) == "TEXT" {
+		msgType := strings.ToUpper(requestType.MsgType)
+		if msgType == "TEXT" {
 			requestBody := &TextRequestBody{}
 			if err := xml.Unmarshal(body, requestBody); err != nil {
 				log.Fatal("xml.Unmarshal failed ", err)
@@ -141,7 +155,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "text/xml")
 			fmt.Fprintf(w, "success")
 			_ = string(text)
-		} else if strings.ToUpper(requestType.MsgType) == "EVENT" {
+		} else if msgType == "EVENT" {
 			requestBody := &MenuRequestBody{}
 			if err := xml.Unmarshal(body, requestBody); err != nil {
 				log.Fatal("xml.Unmarshal failed ", err)
@@ -158,6 +172,22 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 			} else if event == "SUBSCRIBE" {
 				go logic.PIns().OnSubscribe(requestBody.FromUserName, requestBody.EventKey)
 			}
+
+			w.Header().Set("Content-Type", "text/xml")
+			fmt.Fprintf(w, "success")
+		} else if msgType == "VOICE" {
+			requestBody := &VoiceRequestBody{}
+			if err := xml.Unmarshal(body, requestBody); err != nil {
+				log.Fatal("xml.Unmarshal failed ", err)
+				return
+			}
+
+			log.Println("#Recv:", requestBody)
+
+			w.Header().Set("Content-Type", "text/xml")
+			fmt.Fprintf(w, "success")
+
+			wechat.PushTextMessage(requestBody.FromUserName, requestBody.Recognition)
 		}
 	}
 }
