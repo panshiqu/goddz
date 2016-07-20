@@ -132,6 +132,10 @@ func (g *Game1005) OnGameEvent(event string) string {
 		g.elevator[g.selected[1]-1] += 8
 		g.selected = []int{}
 
+		if g.IsSucceed() {
+			return "Well Done"
+		}
+
 	case Down:
 		if len(g.selected) != g.cap {
 			return "两部电梯同时选中才能运行"
@@ -144,9 +148,24 @@ func (g *Game1005) OnGameEvent(event string) string {
 		g.elevator[g.selected[0]-1] -= 13
 		g.elevator[g.selected[1]-1] -= 13
 		g.selected = []int{}
+
+		if g.IsSucceed() {
+			return "Well Done"
+		}
 	}
 
 	return g.GameScene()
+}
+
+// IsSucceed 是否成功
+func (g *Game1005) IsSucceed() bool {
+	for _, v := range g.elevator {
+		if v < 21 || v > 25 {
+			return false
+		}
+	}
+
+	return true
 }
 
 // OnGameStart 游戏开始
