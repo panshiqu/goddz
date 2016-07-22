@@ -40,7 +40,6 @@ func (g *Game1006) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1006) OnGameEvent(event string) string {
-
 	which, ok := g.name[event]
 	if !ok {
 		return "非法青蛙"
