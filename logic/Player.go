@@ -105,7 +105,15 @@ func (p *Player) OnEvent(message string) {
 		}
 
 		// 游戏事件
-		wechat.PushTextMessage(p.openid, p.game.OnGameEvent(message))
+		scene := p.game.OnGameEvent(message)
+
+		// 游戏图片
+		if image := p.game.GameImage(); image != "" {
+			wechat.PushImageMessage(p.openid, image)
+		}
+
+		// 游戏场景
+		wechat.PushTextMessage(p.openid, scene)
 		return
 	}
 
@@ -116,5 +124,13 @@ func (p *Player) OnEvent(message string) {
 	wechat.PushTextMessage(p.openid, p.game.Description())
 
 	// 游戏开始
-	wechat.PushTextMessage(p.openid, p.game.OnGameStart())
+	scene := p.game.OnGameStart()
+
+	// 游戏图片
+	if image := p.game.GameImage(); image != "" {
+		wechat.PushImageMessage(p.openid, image)
+	}
+
+	// 游戏场景
+	wechat.PushTextMessage(p.openid, scene)
 }
