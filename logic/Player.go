@@ -51,6 +51,30 @@ func (p *Player) OnEvent(message string) {
 	case "1004":
 		p.game = new(Game1004)
 
+	// 指挥电梯上下
+	case "1005":
+		p.game = new(Game1005)
+
+	// 青蛙直线跳棋
+	case "1006":
+		p.game = new(Game1006)
+
+	// 哥弟俩均分饮料
+	case "1007":
+		p.game = new(Game1007)
+
+	// 切分金条发工资
+	case "1008":
+		//p.game = new(Game1008)
+
+	// 把灯全打开
+	case "1009":
+		//p.game = new(Game1009)
+
+	// 智力测试图集
+	case "1010":
+		//p.game = new(Game1010)
+
 	default:
 		// 校验
 		if p.game == nil {

@@ -35,6 +35,41 @@ var menu = []byte(`{
                     "type": "click",
                     "name": "一家人过独木桥",
                     "key": "1004"
+                },
+                {
+                    "type": "click",
+                    "name": "指挥电梯上下",
+                    "key": "1005"
+                }
+            ]
+        },
+        {
+            "name": "游戏列表",
+            "sub_button": [
+                {
+                    "type": "click",
+                    "name": "青蛙直线跳棋",
+                    "key": "1006"
+                },
+                {
+                    "type": "click",
+                    "name": "哥弟俩均分饮料",
+                    "key": "1007"
+                },
+                {
+                    "type": "click",
+                    "name": "切分金条发工资",
+                    "key": "1008"
+                },
+                {
+                    "type": "click",
+                    "name": "把灯全打开",
+                    "key": "1009"
+                },
+                {
+                    "type": "click",
+                    "name": "智力测试图集",
+                    "key": "1010"
                 }
             ]
         },
