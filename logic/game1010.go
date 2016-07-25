@@ -93,12 +93,20 @@ func (g *Game1010) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1010) GameImage() string {
-	return g.image[g.index]
+	if g.index < len(g.image) {
+		return g.image[g.index]
+	}
+
+	return ""
 }
 
 // GameScene 游戏场景
 func (g *Game1010) GameScene() string {
-	return g.scene[g.index]
+	if g.index < len(g.scene) {
+		return g.scene[g.index]
+	}
+
+	return ""
 }
 
 // GameTips 提示
