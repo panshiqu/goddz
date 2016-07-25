@@ -19,11 +19,11 @@ func (g *Game1010) Description() string {
 
 // OnGameEvent 游戏事件
 func (g *Game1010) OnGameEvent(event string) string {
+	g.index++
+
 	if g.index >= len(g.scene) {
 		return "已浏览完图集"
 	}
-
-	g.index++
 
 	return g.GameScene()
 }
