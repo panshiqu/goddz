@@ -69,7 +69,7 @@ func (p *Player) OnEvent(message string) {
 
 	// 把灯全打开
 	case "1009":
-		//p.game = new(Game1009)
+		p.game = new(Game1009)
 
 	// 智力测试图集
 	case "1010":
