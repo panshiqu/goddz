@@ -30,12 +30,18 @@ type Game1006 struct {
 
 // Background 背景
 func (g *Game1006) Background() string {
-	return ``
+	return `两队青蛙狭路相逢，(1.2.3)向右移动，(4.5.6)向左移动，移动的规则就是跳棋游戏的规则，你能指挥它们顺利跳过吗？`
 }
 
 // Description 描述
 func (g *Game1006) Description() string {
-	return ``
+	return `青蛙：一(1)、二(2)、三(3)、四(4)、五(5)、六(6)
+
+无需输入 跳 操作
+跳一号青蛙请输入：一 或 1
+
+支持语音识别，请说普通话
+跳一号青蛙请发送语音：一`
 }
 
 // OnGameEvent 游戏事件

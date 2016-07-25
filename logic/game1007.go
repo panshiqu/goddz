@@ -26,12 +26,18 @@ type Game1007 struct {
 
 // Background 背景
 func (g *Game1007) Background() string {
-	return ``
+	return `哥哥和弟弟打开了一瓶10L的饮料，想着均分后再喝才算公平，在家翻箱倒柜后仅找到3L和7L的标准容器，这下可把哥俩难住了，聪明的你能帮帮他们吗？`
 }
 
 // Description 描述
 func (g *Game1007) Description() string {
-	return ``
+	return `瓶子：一(1)、二(2)、三(3)
+
+无需输入 倒 操作
+一号倒入二号请输入：一。二 或 1.2
+
+支持语音识别，请说普通话
+一号倒入二号请发送语音：一二`
 }
 
 // OnGameEvent 游戏事件
