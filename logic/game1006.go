@@ -91,6 +91,11 @@ func (g *Game1006) OnGameStart() string {
 	return g.GameScene()
 }
 
+// GameImage 游戏图片
+func (g *Game1006) GameImage() string {
+	return ""
+}
+
 // GameScene 游戏场景
 func (g *Game1006) GameScene() string {
 	scene := "青蛙信息："

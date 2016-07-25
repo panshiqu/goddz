@@ -115,6 +115,11 @@ func (g *Game1009) OnGameStart() string {
 	return g.GameScene()
 }
 
+// GameImage 游戏图片
+func (g *Game1009) GameImage() string {
+	return ""
+}
+
 // GameScene 游戏场景
 func (g *Game1009) GameScene() string {
 	scene := "灯阵信息：\n  X1 X2 X3\n"

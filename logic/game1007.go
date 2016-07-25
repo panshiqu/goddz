@@ -109,6 +109,11 @@ func (g *Game1007) OnGameStart() string {
 	return g.GameScene()
 }
 
+// GameImage 游戏图片
+func (g *Game1007) GameImage() string {
+	return ""
+}
+
 // GameScene 游戏场景
 func (g *Game1007) GameScene() string {
 	scene := "瓶子信息："

@@ -53,6 +53,11 @@ func (g *Game1008) OnGameStart() string {
 	return g.GameScene()
 }
 
+// GameImage 游戏图片
+func (g *Game1008) GameImage() string {
+	return ""
+}
+
 // GameScene 游戏场景
 func (g *Game1008) GameScene() string {
 	scene := "金条信息："

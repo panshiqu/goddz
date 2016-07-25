@@ -6,6 +6,7 @@ type Game interface {
 	Description() string       // 描述
 	OnGameStart() string       // 游戏开始
 	OnGameEvent(string) string // 游戏事件
+	GameImage() string         // 游戏图片
 	GameScene() string         // 场景
 	GameTips() string          // 提示
 }
