@@ -73,7 +73,7 @@ func (p *Player) OnEvent(message string) {
 
 	// 智力测试图集
 	case "1010":
-		//p.game = new(Game1010)
+		p.game = new(Game1010)
 
 	default:
 		// 校验
