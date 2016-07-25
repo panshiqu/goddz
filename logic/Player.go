@@ -65,7 +65,7 @@ func (p *Player) OnEvent(message string) {
 
 	// 切分金条发工资
 	case "1008":
-		//p.game = new(Game1008)
+		p.game = new(Game1008)
 
 	// 把灯全打开
 	case "1009":
