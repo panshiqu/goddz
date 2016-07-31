@@ -169,7 +169,7 @@ func (g *Game1004) OnGameEvent(event string) string {
 		g.carry = []int{}
 
 		if len(g.left) == 0 {
-			return g.GameScene() + "\n恭喜过关"
+			return g.GameScene() + "\n\n恭喜过关"
 		}
 	}
 

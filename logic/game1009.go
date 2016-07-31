@@ -88,7 +88,7 @@ func (g *Game1009) OnGameEvent(event string) string {
 	}
 
 	if g.IsSucceed() {
-		return g.GameScene() + "恭喜过关"
+		return g.GameScene() + "\n恭喜过关"
 	}
 
 	return g.GameScene()

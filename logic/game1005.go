@@ -151,7 +151,7 @@ func (g *Game1005) OnGameEvent(event string) string {
 		g.selected = []int{}
 
 		if g.IsSucceed() {
-			return g.GameScene() + "\n恭喜过关"
+			return g.GameScene() + "\n\n恭喜过关"
 		}
 	}
 
@@ -219,7 +219,7 @@ func (g *Game1005) GameScene() string {
 
 // GameTips 提示
 func (g *Game1005) GameTips() string {
-	return "8+8－13=3 8+8-13-13=-10"
+	return "8+8－13=3  8+8-13-13=-10"
 }
 
 // Strategy 攻略

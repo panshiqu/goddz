@@ -39,7 +39,7 @@ func (g *Game1008) OnGameEvent(event string) string {
 	g.gold = tmp
 
 	if Contain(g.gold, 1) && Contain(g.gold, 2) && Contain(g.gold, 4) {
-		return g.GameScene() + "\n恭喜过关，但是你真的知道怎么发工资了吗？"
+		return g.GameScene() + "\n\n恭喜过关，但是你真的知道怎么发工资了吗？"
 	}
 
 	return g.GameScene()
