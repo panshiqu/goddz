@@ -140,7 +140,7 @@ func (g *Game1007) GameScene() string {
 
 // GameTips 提示
 func (g *Game1007) GameTips() string {
-	return "7-2*3=1 7-2=5"
+	return "7-2*3=1  7-2=5"
 }
 
 // Strategy 攻略
