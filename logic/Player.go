@@ -102,6 +102,11 @@ func (p *Player) OnEvent(message string) {
 		case "tip":
 			wechat.PushTextMessage(p.openid, p.game.GameTips())
 			return
+
+		// 游戏攻略
+		case "strategy":
+			wechat.PushMpnewsMessage(p.openid, p.game.Strategy())
+			return
 		}
 
 		// 游戏事件

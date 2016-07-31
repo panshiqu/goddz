@@ -95,6 +95,11 @@ var menu = []byte(`{
                     "type": "click",
                     "name": "获取提示",
                     "key": "tip"
+                },
+                {
+                    "type": "click",
+                    "name": "游戏攻略",
+                    "key": "strategy"
                 }
             ]
         }
