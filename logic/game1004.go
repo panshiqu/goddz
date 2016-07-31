@@ -168,7 +168,7 @@ func (g *Game1004) OnGameEvent(event string) string {
 		g.carry = []int{}
 
 		if len(g.left) == 0 {
-			return "Well Done"
+			return g.GameScene() + "\n恭喜过关"
 		}
 	}
 
@@ -233,7 +233,7 @@ func (g *Game1004) GameScene() string {
 	}
 	scene += "，剩余 "
 	scene += strconv.Itoa(TotalTime - g.use)
-	scene += " 秒，请输入"
+	scene += " 秒"
 
 	return scene
 }

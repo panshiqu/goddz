@@ -93,7 +93,7 @@ func (g *Game1007) OnGameEvent(event string) string {
 	g.bottle[which-1] += diff
 
 	if g.bottle[1] == 5 && g.bottle[2] == 5 {
-		return "Well Done"
+		return g.GameScene() + "\n恭喜过关"
 	}
 
 	return g.GameScene()
@@ -127,7 +127,6 @@ func (g *Game1007) GameScene() string {
 		}
 	}
 
-	scene += "\n请输入"
 	return scene
 }
 

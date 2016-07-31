@@ -105,7 +105,12 @@ func (p *Player) OnEvent(message string) {
 
 		// 游戏攻略
 		case "strategy":
-			wechat.PushMpnewsMessage(p.openid, p.game.Strategy())
+			if p.game.Strategy() == "" {
+				wechat.PushTextMessage(p.openid, "没有游戏攻略")
+			} else {
+				wechat.PushMpnewsMessage(p.openid, p.game.Strategy())
+			}
+
 			return
 		}
 

@@ -76,7 +76,7 @@ func (g *Game1006) OnGameEvent(event string) string {
 
 	if g.frog[0] == 4 && g.frog[1] == 5 && g.frog[2] == 6 &&
 		g.frog[4] == 1 && g.frog[5] == 2 && g.frog[6] == 3 {
-		return "Well Done"
+		return g.GameScene() + "\n恭喜过关"
 	}
 
 	return g.GameScene()
@@ -111,7 +111,6 @@ func (g *Game1006) GameScene() string {
 		}
 	}
 
-	scene += "\n请输入"
 	return scene
 }
 

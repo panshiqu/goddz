@@ -150,7 +150,7 @@ func (g *Game1005) OnGameEvent(event string) string {
 		g.selected = []int{}
 
 		if g.IsSucceed() {
-			return "Well Done"
+			return g.GameScene() + "\n恭喜过关"
 		}
 	}
 
@@ -206,7 +206,6 @@ func (g *Game1005) GameScene() string {
 		}
 	}
 
-	scene += "\n请输入"
 	return scene
 }
 

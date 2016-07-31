@@ -87,7 +87,7 @@ func (g *Game1009) OnGameEvent(event string) string {
 	}
 
 	if g.IsSucceed() {
-		return "Well Done"
+		return g.GameScene() + "恭喜过关"
 	}
 
 	return g.GameScene()
@@ -144,7 +144,6 @@ func (g *Game1009) GameScene() string {
 		scene += "\n"
 	}
 
-	scene += "请输入"
 	return scene
 }
 

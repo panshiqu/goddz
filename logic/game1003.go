@@ -183,7 +183,7 @@ func (g *Game1003) OnGameEvent(event string) string {
 		g.carry = []int{}
 
 		if len(g.left) == 0 {
-			return "Well Done"
+			return g.GameScene() + "\n恭喜过关"
 		}
 	}
 
@@ -246,7 +246,6 @@ func (g *Game1003) GameScene() string {
 	} else {
 		scene += "右岸"
 	}
-	scene += "，请输入"
 
 	return scene
 }
