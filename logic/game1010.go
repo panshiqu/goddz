@@ -113,3 +113,8 @@ func (g *Game1010) GameScene() string {
 func (g *Game1010) GameTips() string {
 	return "不需要提示"
 }
+
+// Strategy 攻略
+func (g *Game1010) Strategy() string {
+	return ""
+}

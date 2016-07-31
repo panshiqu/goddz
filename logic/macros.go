@@ -19,6 +19,9 @@ const (
 const (
 	// AdminOpenID 管理员
 	AdminOpenID string = "o0qWoxE_BrLlGqXE2wJU7SZ01lh0"
+
+	// GuideNews 引导图文
+	GuideNews string = "pEnTAPWdIFaIB0fVJT1nvwjL4n1EzYud7Kzkq8Vjz28"
 )
 
 // KV 简单结构

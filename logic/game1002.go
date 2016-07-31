@@ -214,3 +214,8 @@ func (g *Game1002) GameScene() string {
 func (g *Game1002) GameTips() string {
 	return "太简单，没有办法提示"
 }
+
+// Strategy 攻略
+func (g *Game1002) Strategy() string {
+	return "pEnTAPWdIFaIB0fVJT1nv-ztT4cb1x0PgPDYW_K1uRU"
+}

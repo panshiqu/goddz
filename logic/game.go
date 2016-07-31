@@ -9,4 +9,5 @@ type Game interface {
 	GameImage() string         // 游戏图片
 	GameScene() string         // 场景
 	GameTips() string          // 提示
+	Strategy() string          // 攻略
 }
