@@ -40,6 +40,7 @@ const (
 type Game1005 struct {
 	elevator []int          // 电梯
 	selected []int          // 已选
+	image    string         // 图片
 	voice    map[string]KV  // 语音
 	name     map[string]int // 名称
 	cap      int            // 容量
@@ -172,6 +173,7 @@ func (g *Game1005) IsSucceed() bool {
 func (g *Game1005) OnGameStart() string {
 	g.elevator = []int{17, 26, 20, 19, 31}
 	g.selected = []int{}
+	g.image = "pEnTAPWdIFaIB0fVJT1nv2FEDqqVW1pqtetNOHo4_5k"
 	g.voice = map[string]KV{"shang": {3, 0}, "xia": {4, 0}, "xuanzeyi": {1, 1}, "xuanzeer": {1, 2}, "xuanzesan": {1, 3}, "xuanzesi": {1, 4},
 		"xuanzewu": {1, 5}, "quxiaoyi": {2, 1}, "quxiaoer": {2, 2}, "quxiaosan": {2, 3}, "quxiaosi": {2, 4}, "quxiaowu": {2, 5}}
 	g.name = map[string]int{"选择": Select, "取消": Cancel, "上": Up, "下": Down, "一": Elevator1, "二": Elevator2,
@@ -183,7 +185,7 @@ func (g *Game1005) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1005) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nv2FEDqqVW1pqtetNOHo4_5k"
 }
 
 // GameScene 游戏场景

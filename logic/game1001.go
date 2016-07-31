@@ -18,6 +18,7 @@ type Game1001 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	image   string         // 图片
 	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
@@ -171,6 +172,7 @@ func (g *Game1001) OnGameStart() string {
 	g.left = []int{Cabbage, Sheep, Wolf}
 	g.right = []int{}
 	g.carry = []int{}
+	g.image = "pEnTAPWdIFaIB0fVJT1nv3xlwsmjRYzoPEa5JVvsXKY"
 	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangjuanxincai": {1, 1}, "zhuangxiaoyang": {1, 2}, "zhuanglang": {1, 3}, "zhuangcai": {1, 1},
 		"zhuangyang": {1, 2}, "xiejuanxincai": {2, 1}, "xiexiaoyang": {2, 2}, "xielang": {2, 3}, "xiecai": {2, 1}, "xieyang": {2, 2}}
 	g.mapping = map[int]string{Cabbage: "卷心菜", Sheep: "小羊", Wolf: "狼"}
@@ -185,7 +187,13 @@ func (g *Game1001) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1001) GameImage() string {
-	return ""
+	var image string
+	if g.image != "" {
+		image = g.image
+		g.image = ""
+	}
+
+	return image
 }
 
 // GameScene 游戏场景

@@ -4,8 +4,9 @@ import "strconv"
 
 // Game1008 游戏
 type Game1008 struct {
-	gold []int          // 金条
-	name map[string]int // 名称
+	gold  []int          // 金条
+	name  map[string]int // 名称
+	image string         // 图片
 }
 
 // Background 背景
@@ -49,13 +50,14 @@ func (g *Game1008) OnGameStart() string {
 	g.gold = []int{7}
 	g.name = map[string]int{"yi": 1, "er": 2, "san": 3, "si": 4, "wu": 5, "liu": 6, "一": 1, "二": 2,
 		"三": 3, "四": 4, "五": 5, "六": 6, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6}
+	g.image = "pEnTAPWdIFaIB0fVJT1nvzZY79hH4vR1rDGhDtrvtD0"
 
 	return g.GameScene()
 }
 
 // GameImage 游戏图片
 func (g *Game1008) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nvzZY79hH4vR1rDGhDtrvtD0"
 }
 
 // GameScene 游戏场景

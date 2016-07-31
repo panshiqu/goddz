@@ -15,6 +15,7 @@ type Game1002 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	image   string         // 图片
 	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
@@ -159,6 +160,7 @@ func (g *Game1002) OnGameStart() string {
 	g.left = []int{Person, Person, Person, Ghost, Ghost, Ghost}
 	g.right = []int{}
 	g.carry = []int{}
+	g.image = "pEnTAPWdIFaIB0fVJT1nv2l7obo54AkJ2fXss471nwg"
 	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangren": {1, 1}, "zhuanggui": {1, 2}, "xieren": {2, 1}, "xiegui": {2, 2}}
 	g.mapping = map[int]string{Person: "人", Ghost: "鬼"}
 	g.name = map[string]int{"装": Put, "卸": Get, "过河": Go, "人": Person, "鬼": Ghost, "1": 1, "2": 2, "3": 3}
@@ -170,7 +172,7 @@ func (g *Game1002) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1002) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nv2l7obo54AkJ2fXss471nwg"
 }
 
 // GameScene 游戏场景

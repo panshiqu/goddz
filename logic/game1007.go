@@ -20,6 +20,7 @@ const (
 type Game1007 struct {
 	capacity []int          // 容量
 	bottle   []int          // 瓶子
+	image    string         // 图片
 	voice    map[string]KV  // 语音
 	name     map[string]int // 名称
 }
@@ -103,6 +104,7 @@ func (g *Game1007) OnGameEvent(event string) string {
 func (g *Game1007) OnGameStart() string {
 	g.capacity = []int{3, 7, 10}
 	g.bottle = []int{0, 0, 10}
+	g.image = "pEnTAPWdIFaIB0fVJT1nvyqZlxqkESk_zBH0lpkia3k"
 	g.voice = map[string]KV{"yier": {1, 2}, "yisan": {1, 3}, "eryi": {2, 1}, "ersan": {2, 3}, "sanyi": {3, 1}, "saner": {3, 2}}
 	g.name = map[string]int{"一": Bottle1, "二": Bottle2, "三": Bottle3, "1": 1, "2": 2, "3": 3}
 
@@ -111,7 +113,7 @@ func (g *Game1007) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1007) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nvyqZlxqkESk_zBH0lpkia3k"
 }
 
 // GameScene 游戏场景

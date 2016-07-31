@@ -27,6 +27,7 @@ type Game1003 struct {
 	left    []int          // 左岸
 	right   []int          // 右岸
 	carry   []int          // 携带
+	image   string         // 图片
 	voice   map[string]KV  // 语音
 	mapping map[int]string // 映射
 	name    map[string]int // 名称
@@ -195,6 +196,7 @@ func (g *Game1003) OnGameStart() string {
 	g.left = []int{Cop, Pri, Dad, Mom, Son, Son, Dau, Dau}
 	g.right = []int{}
 	g.carry = []int{}
+	g.image = "pEnTAPWdIFaIB0fVJT1nv8dBaV-HgMvtc_8ympQi-ec"
 	g.voice = map[string]KV{"guohe": {3, 0}, "zhuangjingcha": {1, 1}, "zhuangzuifan": {1, 2}, "zhuangbaba": {1, 3}, "zhuangmama": {1, 4}, "zhuangerzi": {1, 5}, "zhuangnver": {1, 6},
 		"zhuangjing": {1, 1}, "zhuangfan": {1, 2}, "zhuangba": {1, 3}, "zhuangma": {1, 4}, "zhuanger": {1, 5}, "zhuangnv": {1, 6},
 		"xiejingcha": {2, 1}, "xiezuifan": {2, 2}, "xiebaba": {2, 3}, "xiemama": {2, 4}, "xieerzi": {2, 5}, "xienver": {2, 6},
@@ -211,7 +213,7 @@ func (g *Game1003) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1003) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nv8dBaV-HgMvtc_8ympQi-ec"
 }
 
 // GameScene 游戏场景

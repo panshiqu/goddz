@@ -24,8 +24,9 @@ const (
 
 // Game1006 游戏
 type Game1006 struct {
-	frog []int          // 青蛙
-	name map[string]int // 名称
+	frog  []int          // 青蛙
+	name  map[string]int // 名称
+	image string         // 图片
 }
 
 // Background 背景
@@ -87,13 +88,14 @@ func (g *Game1006) OnGameStart() string {
 	g.frog = []int{1, 2, 3, 0, 4, 5, 6}
 	g.name = map[string]int{"yi": 1, "er": 2, "san": 3, "si": 4, "wu": 5, "liu": 6, "一": Frog1, "二": Frog2,
 		"三": Frog3, "四": Frog4, "五": Frog5, "六": Frog6, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6}
+	g.image = "pEnTAPWdIFaIB0fVJT1nvxQDDKYATgNCzGUYo6OwbYg"
 
 	return g.GameScene()
 }
 
 // GameImage 游戏图片
 func (g *Game1006) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nvxQDDKYATgNCzGUYo6OwbYg"
 }
 
 // GameScene 游戏场景

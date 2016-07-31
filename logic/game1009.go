@@ -7,6 +7,7 @@ import (
 
 // Game1009 游戏
 type Game1009 struct {
+	image string         // 图片
 	light [][]bool       // 灯阵
 	voice map[string]KV  // 语音
 	name  map[string]int // 名称
@@ -108,6 +109,7 @@ func (g *Game1009) IsSucceed() bool {
 
 // OnGameStart 游戏开始
 func (g *Game1009) OnGameStart() string {
+	g.image = "pEnTAPWdIFaIB0fVJT1nv72KNNMy3eE4_HEx_LsuQfk"
 	g.light = [][]bool{{false, false, false}, {false, false, false}, {false, false, false}}
 	g.voice = map[string]KV{"yiyi": {1, 1}, "yier": {1, 2}, "yisan": {1, 3}, "eryi": {2, 1}, "erer": {2, 2}, "ersan": {2, 3}, "sanyi": {3, 1}, "saner": {3, 2}, "sansan": {3, 3}}
 	g.name = map[string]int{"一": 1, "二": 2, "三": 3, "1": 1, "2": 2, "3": 3}
@@ -117,7 +119,7 @@ func (g *Game1009) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1009) GameImage() string {
-	return ""
+	return "pEnTAPWdIFaIB0fVJT1nv72KNNMy3eE4_HEx_LsuQfk"
 }
 
 // GameScene 游戏场景
