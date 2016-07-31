@@ -260,7 +260,7 @@ func (g *Game1003) GameScene() string {
 
 // GameTips 提示
 func (g *Game1003) GameTips() string {
-	return "太简单，没有办法提示"
+	return "警犯可是成功的关键，多活动活动他们"
 }
 
 // Strategy 攻略

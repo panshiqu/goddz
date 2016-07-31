@@ -157,7 +157,7 @@ func (g *Game1009) GameScene() string {
 
 // GameTips 提示
 func (g *Game1009) GameTips() string {
-	return "太简单，没有办法提示"
+	return "先四角再中间"
 }
 
 // Strategy 攻略

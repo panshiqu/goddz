@@ -124,7 +124,7 @@ func (g *Game1006) GameScene() string {
 
 // GameTips 提示
 func (g *Game1006) GameTips() string {
-	return "太简单，没有办法提示"
+	return "跳之前先把对面的青蛙跳到自己面前"
 }
 
 // Strategy 攻略

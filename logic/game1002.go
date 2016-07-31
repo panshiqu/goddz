@@ -219,7 +219,7 @@ func (g *Game1002) GameScene() string {
 
 // GameTips 提示
 func (g *Game1002) GameTips() string {
-	return "太简单，没有办法提示"
+	return "二人去一人一鬼回进而避免竞争"
 }
 
 // Strategy 攻略

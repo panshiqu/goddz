@@ -81,7 +81,7 @@ func (g *Game1008) GameScene() string {
 
 // GameTips 提示
 func (g *Game1008) GameTips() string {
-	return "太简单，没有办法提示"
+	return "操作说明中好像有答案哦"
 }
 
 // Strategy 攻略

@@ -248,7 +248,7 @@ func (g *Game1004) GameScene() string {
 
 // GameTips 提示
 func (g *Game1004) GameTips() string {
-	return "太简单，没有办法提示"
+	return "用时少的先过并肩负把灯送回的责任"
 }
 
 // Strategy 攻略

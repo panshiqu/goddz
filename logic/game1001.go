@@ -234,7 +234,7 @@ func (g *Game1001) GameScene() string {
 
 // GameTips 提示
 func (g *Game1001) GameTips() string {
-	return "太简单，没有办法提示"
+	return "运送货物过河后可以带回对岸的羊从而避免竞争"
 }
 
 // Strategy 攻略

@@ -219,7 +219,7 @@ func (g *Game1005) GameScene() string {
 
 // GameTips 提示
 func (g *Game1005) GameTips() string {
-	return "太简单，没有办法提示"
+	return "8+8－13=3 8+8-13-13=-10"
 }
 
 // Strategy 攻略
