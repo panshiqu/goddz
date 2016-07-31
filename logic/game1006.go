@@ -95,7 +95,13 @@ func (g *Game1006) OnGameStart() string {
 
 // GameImage 游戏图片
 func (g *Game1006) GameImage() string {
-	return "pEnTAPWdIFaIB0fVJT1nvxQDDKYATgNCzGUYo6OwbYg"
+	var image string
+	if g.image != "" {
+		image = g.image
+		g.image = ""
+	}
+
+	return image
 }
 
 // GameScene 游戏场景
