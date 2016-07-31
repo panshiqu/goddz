@@ -119,7 +119,8 @@ func (p *Processor) OnEvent(user string, message string) {
 
 // OnSubscribe 订阅到来
 func (p *Processor) OnSubscribe(user string, message string) {
-	wechat.PushTextMessage(user, "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战")
+	wechat.PushTextMessage(user, WelcomeMessage)
+	wechat.PushMpnewsMessage(user, GuideMpnews)
 
 	switch strings.TrimLeft(message, "qrscene_") {
 	// 睢县公园

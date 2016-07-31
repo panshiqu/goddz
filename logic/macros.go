@@ -20,8 +20,11 @@ const (
 	// AdminOpenID 管理员
 	AdminOpenID string = "o0qWoxE_BrLlGqXE2wJU7SZ01lh0"
 
-	// GuideNews 引导图文
-	GuideNews string = "pEnTAPWdIFaIB0fVJT1nvwjL4n1EzYud7Kzkq8Vjz28"
+	// GuideMpnews 引导图文
+	GuideMpnews string = "pEnTAPWdIFaIB0fVJT1nvwjL4n1EzYud7Kzkq8Vjz28"
+
+	// WelcomeMessage 欢迎消息
+	WelcomeMessage string = "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战"
 )
 
 // KV 简单结构
