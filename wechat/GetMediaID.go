@@ -31,11 +31,12 @@ func GetMediaID() {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	defer resp.Body.Close()
 
 	if err != nil {
 		log.Fatal("http.Client.Do failed ", err)
 	}
+
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

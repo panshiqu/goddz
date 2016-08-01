@@ -49,10 +49,14 @@ func (a *AccessToken) Refresh() {
 		appSecret}, "")
 
 	response, err := http.Get(request)
+	if err != nil {
+		log.Fatal("http.Get failed ", err)
+	}
+
 	defer response.Body.Close()
 
-	if err != nil || response.StatusCode != http.StatusOK {
-		log.Fatal("http.Get failed ", err)
+	if response.StatusCode != http.StatusOK {
+		log.Fatal("response.StatusCode error")
 	}
 
 	body, err := ioutil.ReadAll(response.Body)

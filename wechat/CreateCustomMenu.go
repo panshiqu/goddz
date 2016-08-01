@@ -117,9 +117,10 @@ func CreateCustomMenu() {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	defer resp.Body.Close()
 
 	if err != nil {
 		log.Fatal("http.Client.Do failed ", err)
 	}
+
+	resp.Body.Close()
 }
