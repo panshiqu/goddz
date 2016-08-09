@@ -267,3 +267,12 @@ func (g *Game1003) GameTips() string {
 func (g *Game1003) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv47tmSKO3M7nMI4Fk10b2Vw"
 }
+
+// Remind 提醒
+func (g *Game1003) Remind() string {
+	if len(g.left) == 0 {
+		return "您已通关警犯一家人过河，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关警犯一家人过河，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

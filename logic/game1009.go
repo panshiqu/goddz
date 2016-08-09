@@ -164,3 +164,12 @@ func (g *Game1009) GameTips() string {
 func (g *Game1009) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv2jGS9zF5wSQxfvoPlDpfNc"
 }
+
+// Remind 提醒
+func (g *Game1009) Remind() string {
+	if g.IsSucceed() {
+		return "您已通关把灯全打开，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关把灯全打开，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

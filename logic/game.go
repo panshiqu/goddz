@@ -10,4 +10,5 @@ type Game interface {
 	GameScene() string         // 场景
 	GameTips() string          // 提示
 	Strategy() string          // 攻略
+	Remind() string            // 提醒
 }

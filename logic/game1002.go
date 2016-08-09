@@ -226,3 +226,12 @@ func (g *Game1002) GameTips() string {
 func (g *Game1002) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv-ztT4cb1x0PgPDYW_K1uRU"
 }
+
+// Remind 提醒
+func (g *Game1002) Remind() string {
+	if len(g.left) == 0 {
+		return "您已通关三人三鬼过河，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关三人三鬼过河，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

@@ -147,3 +147,12 @@ func (g *Game1007) GameTips() string {
 func (g *Game1007) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv0Ie66Y8jxaNAwxGWtw_svs"
 }
+
+// Remind 提醒
+func (g *Game1007) Remind() string {
+	if g.bottle[1] == 5 && g.bottle[2] == 5 {
+		return "您已通关哥弟俩均分饮料，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关哥弟俩均分饮料，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

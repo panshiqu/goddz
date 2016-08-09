@@ -118,3 +118,12 @@ func (g *Game1010) GameTips() string {
 func (g *Game1010) Strategy() string {
 	return ""
 }
+
+// Remind 提醒
+func (g *Game1010) Remind() string {
+	if g.index >= len(g.scene) {
+		return "您已浏览完智力测试图集，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未浏览完智力测试图集，您可回复任意信息获取下一张"
+}

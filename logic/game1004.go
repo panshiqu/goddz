@@ -255,3 +255,12 @@ func (g *Game1004) GameTips() string {
 func (g *Game1004) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nvwMFZBXgZDIlR0T68BgYOrY"
 }
+
+// Remind 提醒
+func (g *Game1004) Remind() string {
+	if len(g.left) == 0 {
+		return "您已通关一家人过独木桥，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关一家人过独木桥，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

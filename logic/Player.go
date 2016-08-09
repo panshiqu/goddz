@@ -168,4 +168,6 @@ func (p *Player) OnRemind() {
 		return
 	}
 
+	// 游戏内提醒
+	wechat.PushTextMessage(p.openid, p.game.Remind())
 }

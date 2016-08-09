@@ -88,3 +88,12 @@ func (g *Game1008) GameTips() string {
 func (g *Game1008) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv126xbwMXaiLDqG1bkCr8xQ"
 }
+
+// Remind 提醒
+func (g *Game1008) Remind() string {
+	if Contain(g.gold, 1) && Contain(g.gold, 2) && Contain(g.gold, 4) {
+		return "您已通关切分金条发工资，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关切分金条发工资，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}

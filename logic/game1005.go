@@ -134,7 +134,7 @@ func (g *Game1005) OnGameEvent(event string) string {
 		g.selected = []int{}
 
 		if g.IsSucceed() {
-			return "Well Done"
+			return g.GameScene() + "\n\n恭喜过关"
 		}
 
 	case Down:
@@ -225,4 +225,13 @@ func (g *Game1005) GameTips() string {
 // Strategy 攻略
 func (g *Game1005) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nvyi_VHoQ-1iAB9NOxmtYZ9M"
+}
+
+// Remind 提醒
+func (g *Game1005) Remind() string {
+	if g.IsSucceed() {
+		return "您已通关指挥电梯上下，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关指挥电梯上下，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
 }

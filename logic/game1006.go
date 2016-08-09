@@ -131,3 +131,13 @@ func (g *Game1006) GameTips() string {
 func (g *Game1006) Strategy() string {
 	return "pEnTAPWdIFaIB0fVJT1nv30aGZLKjR5pp2KEonUk_Ck"
 }
+
+// Remind 提醒
+func (g *Game1006) Remind() string {
+	if g.frog[0] == 4 && g.frog[1] == 5 && g.frog[2] == 6 &&
+		g.frog[4] == 1 && g.frog[5] == 2 && g.frog[6] == 3 {
+		return "您已通关青蛙直线跳棋，请通过点击菜单或发送指令选择其它游戏继续挑战"
+	}
+
+	return "还未通关青蛙直线跳棋，开动脑筋继续挑战吧，当然您也可以通过点击菜单或发送指令获取提示和攻略\n\n" + g.GameScene()
+}
