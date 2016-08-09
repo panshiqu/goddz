@@ -1,12 +1,17 @@
 package logic
 
-import "github.com/panshiqu/goddz/wechat"
+import (
+	"time"
+
+	"github.com/panshiqu/goddz/wechat"
+)
 
 // Player 玩家
 type Player struct {
-	openid string // 编号
-	game   Game   // 游戏
-	cnt    int    // 计数
+	remind *time.Timer // 提醒
+	openid string      // 编号
+	game   Game        // 游戏
+	cnt    int         // 计数
 }
 
 // GetOpenID 获取微信编号
@@ -29,10 +34,20 @@ func (p *Player) SetCnt(v int) {
 	p.cnt = v
 }
 
+// Init 初始化
+func (p *Player) Init() {
+	p.remind = time.AfterFunc(24*time.Hour, func() {
+		p.OnRemind()
+	})
+}
+
 // OnEvent 事件到来
 func (p *Player) OnEvent(message string) {
 	// 计数
 	p.cnt++
+
+	// 重新计时
+	p.remind.Reset(24 * time.Hour)
 
 	switch message {
 	// 狼羊菜过河
@@ -143,4 +158,14 @@ func (p *Player) OnEvent(message string) {
 
 	// 游戏场景
 	wechat.PushTextMessage(p.openid, scene)
+}
+
+// OnRemind 触发提醒
+func (p *Player) OnRemind() {
+	if p.game == nil {
+		wechat.PushTextMessage(p.openid, "您已24小时未开始游戏，若不知如何操作请仔细阅读新手引导！")
+		wechat.PushMpnewsMessage(p.openid, GuideMpnews)
+		return
+	}
+
 }
