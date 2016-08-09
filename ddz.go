@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/mozillazg/go-pinyin"
 	"github.com/panshiqu/goddz/base"
 	"github.com/panshiqu/goddz/logic"
@@ -212,9 +213,14 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("start")
 
-	// SSDBPOOL
-	// if !logic.PIns().Init() {
-	// 	log.Fatal("logic.PIns.Init failed")
+	// DB
+	if !logic.PIns().InitDB() {
+		log.Fatal("logic.PIns.InitDB failed")
+	}
+
+	// SSDB
+	// if !logic.PIns().InitSSDB() {
+	// 	log.Fatal("logic.PIns.InitSSDB failed")
 	// }
 
 	// 定期刷新
@@ -224,7 +230,7 @@ func main() {
 	wechat.PushTextMessage(logic.AdminOpenID, "服务器启动成功")
 
 	// 创建菜单
-	wechat.CreateCustomMenu()
+	//wechat.CreateCustomMenu()
 
 	// 开启服务
 	http.HandleFunc("/", procRequest)

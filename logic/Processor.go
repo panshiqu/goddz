@@ -2,6 +2,7 @@ package logic
 
 import (
 	"bytes"
+	"database/sql"
 	"log"
 	"strconv"
 	"strings"
@@ -13,6 +14,7 @@ import (
 
 // Processor 处理器
 type Processor struct {
+	db      *sql.DB            // DB
 	ssdb    *gossdb.Connectors // SSDB
 	players map[string]*Player // 玩家
 	mutex   sync.Mutex         // 玩家锁
@@ -26,8 +28,24 @@ func (p *Processor) SsdbPool() *gossdb.Connectors {
 	return p.ssdb
 }
 
-// Init 初始化
-func (p *Processor) Init() bool {
+// InitDB 初始化DB
+func (p *Processor) InitDB() bool {
+	var err error
+	if p.db, err = sql.Open("mysql", DataSourceName); err != nil {
+		log.Println("sql.Open ", err)
+		return false
+	}
+
+	if err = p.db.Ping(); err != nil {
+		log.Println("db.Ping ", err)
+		return false
+	}
+
+	return true
+}
+
+// InitSSDB 初始化SSDB
+func (p *Processor) InitSSDB() bool {
 	var err error
 	p.ssdb, err = gossdb.NewPool(&gossdb.Config{
 		Host:             "127.0.0.1",
