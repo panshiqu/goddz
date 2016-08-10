@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/panshiqu/goddz/logic"
 	"github.com/panshiqu/goddz/wechat"
 	"github.com/seefan/gossdb"
 )
@@ -88,6 +89,7 @@ func (p *Processor) OnEvent(user string, message string) {
 		// 手动刷新
 		case "refresh":
 			wechat.ATIns().Refresh()
+			wechat.PushTextMessage(logic.AdminOpenID, ATIns().GetAT())
 			return
 
 		// 运行状态
