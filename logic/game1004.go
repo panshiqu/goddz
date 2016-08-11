@@ -47,7 +47,7 @@ func (g *Game1004) GetID() int {
 
 // IsSucceed 是否成功
 func (g *Game1004) IsSucceed() bool {
-	if len(g.left) == 0 {
+	if len(g.left) == 0 && len(g.carry) == 0 {
 		return true
 	}
 

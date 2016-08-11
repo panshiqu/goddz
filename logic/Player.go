@@ -142,9 +142,12 @@ func (p *Player) OnEvent(message string) {
 		// 游戏场景
 		wechat.PushTextMessage(p.openid, scene)
 
-		// 成功通关
 		if p.game.IsSucceed() {
+			// 成功通关
 			p.OnSuccess()
+
+			// 游戏开始
+			p.game.OnGameStart()
 		}
 
 		return
@@ -182,19 +185,13 @@ func (p *Player) OnRemind() {
 
 // OnSuccess 成功通关
 func (p *Player) OnSuccess() {
-	log.Println("OnSuccess")
-
 	var count int
 	if err := PIns().GetDB().QueryRow("SELECT PassCount FROM PassStat WHERE OpenID = ? AND GameID = ?", p.openid, p.game.GetID()).Scan(&count); err == nil {
-		log.Println("UPDATE")
-
 		// 更新数据
 		if _, err := PIns().GetDB().Exec("UPDATE PassStat SET PassCount = PassCount + 1 WHERE OpenID = ? AND GameID = ?", p.openid, p.game.GetID()); err != nil {
 			log.Println("UPDATE", err)
 		}
 	} else if err == sql.ErrNoRows {
-		log.Println("INSERT")
-
 		// 插入数据
 		if _, err := PIns().GetDB().Exec("INSERT INTO PassStat (OpenID, GameID) VALUES (?, ?)", p.openid, p.game.GetID()); err != nil {
 			log.Println("INSERT", err)
