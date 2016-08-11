@@ -9,6 +9,20 @@ type Game1008 struct {
 	image string         // 图片
 }
 
+// GetID 获取编号
+func (g *Game1008) GetID() int {
+	return 1008
+}
+
+// IsSucceed 是否成功
+func (g *Game1008) IsSucceed() bool {
+	if Contain(g.gold, 1) && Contain(g.gold, 2) && Contain(g.gold, 4) {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1008) Background() string {
 	return `一名短工打理院落，需工作七天，土豪仅从自己金库里拿出一根金条用于发工资，短工日工资正好是1/7金条，假若土豪能准确切出他想要的比例，他能只切两刀就能发放这七天的工资吗？`

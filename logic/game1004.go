@@ -40,6 +40,20 @@ type Game1004 struct {
 	use     int            // 已用
 }
 
+// GetID 获取编号
+func (g *Game1004) GetID() int {
+	return 1004
+}
+
+// IsSucceed 是否成功
+func (g *Game1004) IsSucceed() bool {
+	if len(g.left) == 0 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1004) Background() string {
 	return `漆黑的夜里，一家人需要通过一座独木桥，但独木桥最多承载两人的重量，一家人只有一盏灯，但这盏灯只能使用30秒，每个人过桥所需的时间不同，哥哥1秒、弟弟3秒、妈妈6秒、爸爸8秒、爷爷12秒，如何在灯熄灭前顺利通过独木桥，你能指点一下他们吗？`

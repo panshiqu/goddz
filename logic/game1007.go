@@ -25,6 +25,20 @@ type Game1007 struct {
 	name     map[string]int // 名称
 }
 
+// GetID 获取编号
+func (g *Game1007) GetID() int {
+	return 1007
+}
+
+// IsSucceed 是否成功
+func (g *Game1007) IsSucceed() bool {
+	if g.bottle[1] == 5 && g.bottle[2] == 5 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1007) Background() string {
 	return `哥哥和弟弟打开了一瓶10L的饮料，想着均分后再喝才算公平，在家翻箱倒柜后仅找到3L和7L的标准容器，这下可把哥弟俩难住了，聪明的你能帮帮他们吗？`

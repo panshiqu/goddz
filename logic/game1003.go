@@ -35,6 +35,20 @@ type Game1003 struct {
 	cap     int            // 容量
 }
 
+// GetID 获取编号
+func (g *Game1003) GetID() int {
+	return 1003
+}
+
+// IsSucceed 是否成功
+func (g *Game1003) IsSucceed() bool {
+	if len(g.left) == 0 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1003) Background() string {
 	return `一家六口人，爸爸、妈妈、两个儿子、两个女儿在旅行途中迷路，幸好遇见一名警察正在押解一名罪犯，无奈只能选择与警察同行寻找回家的路。现在他们需要通过一条河流，你能帮帮他们吗？

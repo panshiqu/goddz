@@ -13,6 +13,11 @@ type Game1009 struct {
 	name  map[string]int // 名称
 }
 
+// GetID 获取编号
+func (g *Game1009) GetID() int {
+	return 1009
+}
+
 // Background 背景
 func (g *Game1009) Background() string {
 	return `一组3X3灯阵，开关任意一盏灯，都将同时触发其上下左右灯的开关，你能把灯全打开吗？`

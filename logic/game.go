@@ -2,6 +2,8 @@ package logic
 
 // Game 游戏
 type Game interface {
+	GetID() int                // 编号
+	IsSucceed() bool           // 成功
 	Background() string        // 背景
 	Description() string       // 描述
 	OnGameStart() string       // 游戏开始

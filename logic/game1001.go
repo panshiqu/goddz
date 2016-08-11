@@ -27,6 +27,20 @@ type Game1001 struct {
 	cap     int            // 容量
 }
 
+// GetID 获取编号
+func (g *Game1001) GetID() int {
+	return 1001
+}
+
+// IsSucceed 是否成功
+func (g *Game1001) IsSucceed() bool {
+	if len(g.left) == 0 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1001) Background() string {
 	return `农夫准备把卷心菜、小羊、狼运到河对岸的集市售卖，可是他只有一条仅能同时承载一个货物的小船，而且他不在的时候小羊会吃掉卷心菜、狼会吃掉小羊。假如你是他，你能成功将所有货物安全运到对岸吗？`

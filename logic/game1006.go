@@ -29,6 +29,21 @@ type Game1006 struct {
 	image string         // 图片
 }
 
+// GetID 获取编号
+func (g *Game1006) GetID() int {
+	return 1006
+}
+
+// IsSucceed 是否成功
+func (g *Game1006) IsSucceed() bool {
+	if g.frog[0] == 4 && g.frog[1] == 5 && g.frog[2] == 6 &&
+		g.frog[4] == 1 && g.frog[5] == 2 && g.frog[6] == 3 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1006) Background() string {
 	return `两队青蛙狭路相逢，(1.2.3)向右移动，(4.5.6)向左移动，移动的规则就是跳棋游戏的规则，你能指挥它们顺利跳过吗？`

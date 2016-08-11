@@ -23,6 +23,20 @@ type Game1002 struct {
 	cap     int            // 容量
 }
 
+// GetID 获取编号
+func (g *Game1002) GetID() int {
+	return 1002
+}
+
+// IsSucceed 是否成功
+func (g *Game1002) IsSucceed() bool {
+	if len(g.left) == 0 {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1002) Background() string {
 	return `三人三鬼准备过河，人和鬼都会开船，可是岸边只有一条仅能同时承载两个货物的空船，而且鬼比人多的时候鬼将吃人。你能指导他们安全过河吗？`

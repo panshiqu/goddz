@@ -7,6 +7,20 @@ type Game1010 struct {
 	scene []string // 场景
 }
 
+// GetID 获取编号
+func (g *Game1010) GetID() int {
+	return 1010
+}
+
+// IsSucceed 是否成功
+func (g *Game1010) IsSucceed() bool {
+	if g.index >= len(g.scene) {
+		return true
+	}
+
+	return false
+}
+
 // Background 背景
 func (g *Game1010) Background() string {
 	return `幸苦收集供君欣赏`
