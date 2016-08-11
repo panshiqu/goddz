@@ -171,3 +171,8 @@ func (p *Player) OnRemind() {
 	// 游戏内提醒
 	wechat.PushTextMessage(p.openid, p.game.Remind())
 }
+
+// OnSuccess 成功通关
+func (p *Player) OnSuccess() {
+
+}

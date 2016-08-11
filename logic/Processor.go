@@ -143,10 +143,28 @@ func (p *Processor) OnSubscribe(user string, message string) {
 	wechat.PushTextMessage(user, WelcomeMessage)
 	wechat.PushMpnewsMessage(user, GuideMpnews)
 
-	switch strings.TrimLeft(message, "qrscene_") {
-	// 睢县公园
-	case "SuiXian Park":
-		log.Println("SuiXian Park")
+	// 查询数据库
+	var status int
+	promotion := strings.TrimLeft(message, "qrscene_")
+	if err := p.db.QueryRow("SELECT SubscribeStatus FROM UserInfo WHERE OpenID = ?", user).Scan(&status); err == nil {
+		// 更新数据
+		if _, err := p.db.Exec("UPDATE UserInfo SET PromotionID = ?, SubscribeStatus = TRUE WHERE OpenID = ?", promotion, user); err != nil {
+			log.Println("UPDATE", err)
+		}
+	} else if err == sql.ErrNoRows {
+		// 插入数据
+		if _, err := p.db.Exec("INSERT INTO UserInfo (OpenID, PromotionID) VALUES (?, ?)", user, promotion); err != nil {
+			log.Println("INSERT", err)
+		}
+	} else {
+		log.Println("SELECT", err)
+	}
+}
+
+// OnUnSubscribe 取消订阅
+func (p *Processor) OnUnSubscribe(user string) {
+	if _, err := p.db.Exec("UPDATE UserInfo SET SubscribeStatus = FALSE WHERE OpenID = ?", user); err != nil {
+		log.Println("UPDATE", err)
 	}
 }
 

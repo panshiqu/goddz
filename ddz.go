@@ -214,9 +214,9 @@ func main() {
 	log.Println("start")
 
 	// DB
-	// if !logic.PIns().InitDB() {
-	// 	log.Fatal("logic.PIns.InitDB failed")
-	// }
+	if !logic.PIns().InitDB() {
+		log.Fatal("logic.PIns.InitDB failed")
+	}
 
 	// SSDB
 	// if !logic.PIns().InitSSDB() {
