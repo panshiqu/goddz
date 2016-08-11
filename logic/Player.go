@@ -1,6 +1,8 @@
 package logic
 
 import (
+	"database/sql"
+	"log"
 	"time"
 
 	"github.com/panshiqu/goddz/wechat"
@@ -139,6 +141,12 @@ func (p *Player) OnEvent(message string) {
 
 		// 游戏场景
 		wechat.PushTextMessage(p.openid, scene)
+
+		// 成功通关
+		if p.game.IsSucceed() {
+			p.OnSuccess()
+		}
+
 		return
 	}
 
@@ -174,5 +182,18 @@ func (p *Player) OnRemind() {
 
 // OnSuccess 成功通关
 func (p *Player) OnSuccess() {
-
+	var count int
+	if err := PIns().GetDB().QueryRow("SELECT PassCount FROM PassStat WHERE OpenID = ?", p.openid).Scan(&count); err == nil {
+		// 更新数据
+		if _, err := PIns().GetDB().Exec("UPDATE PassStat SET PassCount = PassCount + 1 WHERE OpenID = ? AND GameID = ?", p.openid, p.game.GetID()); err != nil {
+			log.Println("UPDATE", err)
+		}
+	} else if err == sql.ErrNoRows {
+		// 插入数据
+		if _, err := PIns().GetDB().Exec("INSERT INTO PassStat (OpenID, GameID) VALUES (?, ?)", p.openid, p.game.GetID()); err != nil {
+			log.Println("INSERT", err)
+		}
+	} else {
+		log.Println("SELECT", err)
+	}
 }

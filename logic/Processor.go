@@ -23,6 +23,11 @@ type Processor struct {
 // 实例
 var ins *Processor
 
+// GetDB 获取数据库
+func (p *Processor) GetDB() *sql.DB {
+	return p.db
+}
+
 // SsdbPool 获取连接池
 func (p *Processor) SsdbPool() *gossdb.Connectors {
 	return p.ssdb
