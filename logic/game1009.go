@@ -64,6 +64,10 @@ func (g *Game1009) OnGameEvent(event string) string {
 		if which, ok = g.name[events[1]]; !ok {
 			return "非法Y坐标"
 		}
+
+		if cmd > len(g.light) || which > len(g.light) {
+			return "非法XY坐标"
+		}
 	}
 
 	cmd--
@@ -93,7 +97,26 @@ func (g *Game1009) OnGameEvent(event string) string {
 	}
 
 	if g.IsSucceed() {
-		return g.GameScene() + "\n恭喜过关"
+		var ext string
+		switch len(g.light) {
+		case 3:
+			ext = "，已为你开启4X4灯阵(非3X3灯阵不支持语音识别)"
+			g.light = [][]bool{{false, false, false, false}, {false, false, false, false},
+				{false, false, false, false}, {false, false, false, false}}
+		case 4:
+			ext = "，已为你开启5X5灯阵(非3X3灯阵不支持语音识别)"
+			g.light = [][]bool{{false, false, false, false, false}, {false, false, false, false, false},
+				{false, false, false, false, false}, {false, false, false, false, false}, {false, false, false, false, false}}
+		case 5:
+			ext = "，已为你开启6X6灯阵(非3X3灯阵不支持语音识别)"
+			g.light = [][]bool{{false, false, false, false, false, false}, {false, false, false, false, false, false},
+				{false, false, false, false, false, false}, {false, false, false, false, false, false},
+				{false, false, false, false, false, false}, {false, false, false, false, false, false}}
+		default:
+			ext = "，没有那么多灯阵让你挑战啦！！！"
+		}
+
+		return g.GameScene() + "\n恭喜过关" + ext
 	}
 
 	return g.GameScene()
@@ -117,7 +140,7 @@ func (g *Game1009) OnGameStart() string {
 	g.image = "pEnTAPWdIFaIB0fVJT1nv72KNNMy3eE4_HEx_LsuQfk"
 	g.light = [][]bool{{false, false, false}, {false, false, false}, {false, false, false}}
 	g.voice = map[string]KV{"yiyi": {1, 1}, "yier": {1, 2}, "yisan": {1, 3}, "eryi": {2, 1}, "erer": {2, 2}, "ersan": {2, 3}, "sanyi": {3, 1}, "saner": {3, 2}, "sansan": {3, 3}}
-	g.name = map[string]int{"一": 1, "二": 2, "三": 3, "1": 1, "2": 2, "3": 3}
+	g.name = map[string]int{"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6}
 
 	return g.GameScene()
 }
@@ -135,7 +158,12 @@ func (g *Game1009) GameImage() string {
 
 // GameScene 游戏场景
 func (g *Game1009) GameScene() string {
-	scene := "灯阵信息：\n  X1 X2 X3\n"
+	scene := "灯阵信息：\n  "
+	for i := 1; i <= len(g.light); i++ {
+		scene += "X" + strconv.Itoa(i) + " "
+	}
+	scene += "\n"
+
 	for k, v := range g.light {
 		for kk, vv := range v {
 			if kk == 0 {
