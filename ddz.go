@@ -94,7 +94,8 @@ func makeSignature(timestamp string, nonce string) string {
 
 func procRequest(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		log.Fatal("http.Request.ParseForm failed ", err)
+		// 不能使用 log.Fatal: invalid URL escape "%%7"
+		log.Println("http.Request.ParseForm failed ", err)
 		return
 	}
 
