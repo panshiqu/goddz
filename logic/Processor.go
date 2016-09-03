@@ -73,6 +73,11 @@ func (p *Processor) OnTimer(tid int64, param interface{}) {
 	switch tid {
 	case RefreshTimer:
 		wechat.ATIns().Refresh()
+
+		// 尝试解决 write: broken pipe
+		if err := p.db.Ping(); err != nil {
+			log.Println("db.Ping ", err)
+		}
 	}
 }
 
