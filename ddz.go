@@ -104,6 +104,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 	nonce := strings.Join(r.Form["nonce"], "")
 
 	if signature != makeSignature(timestamp, nonce) {
+		http.Redirect(w, r, "http://www.iplaygame.com.cn:8080"+r.URL.RequestURI(), http.StatusFound)
 		log.Println("Validate failed")
 		log.Println(r)
 		return
