@@ -175,6 +175,8 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.EventKey)
 			} else if event == "SUBSCRIBE" {
 				go logic.PIns().OnSubscribe(requestBody.FromUserName, requestBody.EventKey)
+			} else if event == "UNSUBSCRIBE" {
+				go logic.PIns().OnUnSubscribe(requestBody.FromUserName)
 			}
 
 			w.Header().Set("Content-Type", "text/xml")
