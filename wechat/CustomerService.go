@@ -51,6 +51,12 @@ type MpnewsMessageContent struct {
 
 // PushTextMessage 推送文本消息
 func PushTextMessage(user string, message string) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("PushTextMessage fatal recover")
+		}
+	}()
+
 	csm := &CustomerServiceText{
 		ToUser:  user,
 		MsgType: "text",
@@ -88,6 +94,12 @@ func PushTextMessage(user string, message string) {
 
 // PushImageMessage 推送图片消息
 func PushImageMessage(user string, message string) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("PushImageMessage fatal recover")
+		}
+	}()
+
 	csm := &CustomerServiceImage{
 		ToUser:  user,
 		MsgType: "image",
@@ -125,6 +137,12 @@ func PushImageMessage(user string, message string) {
 
 // PushMpnewsMessage 推送图文消息
 func PushMpnewsMessage(user string, message string) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("PushMpnewsMessage fatal recover")
+		}
+	}()
+
 	csm := &CustomerServiceMpnews{
 		ToUser:  user,
 		MsgType: "mpnews",

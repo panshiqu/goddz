@@ -42,6 +42,12 @@ func (a *AccessToken) GetAT() string {
 
 // Refresh 刷新
 func (a *AccessToken) Refresh() {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("Refresh fatal recover")
+		}
+	}()
+
 	request := strings.Join([]string{accessTokenFetchURL,
 		"?grant_type=client_credential&appid=",
 		appID,
