@@ -44,7 +44,7 @@ func (a *AccessToken) GetAT() string {
 func (a *AccessToken) Refresh() {
 	defer func() {
 		if err := recover(); err != nil {
-			log.Println("Refresh fatal recover")
+			log.Println("Refresh panic recover")
 		}
 	}()
 

@@ -53,7 +53,8 @@ type MpnewsMessageContent struct {
 func PushTextMessage(user string, message string) {
 	defer func() {
 		if err := recover(); err != nil {
-			log.Println("PushTextMessage fatal recover")
+			log.Println("PushTextMessage panic recover")
+			PushTextMessage(user, message)
 		}
 	}()
 
@@ -96,7 +97,8 @@ func PushTextMessage(user string, message string) {
 func PushImageMessage(user string, message string) {
 	defer func() {
 		if err := recover(); err != nil {
-			log.Println("PushImageMessage fatal recover")
+			log.Println("PushImageMessage panic recover")
+			PushImageMessage(user, message)
 		}
 	}()
 
@@ -139,7 +141,8 @@ func PushImageMessage(user string, message string) {
 func PushMpnewsMessage(user string, message string) {
 	defer func() {
 		if err := recover(); err != nil {
-			log.Println("PushMpnewsMessage fatal recover")
+			log.Println("PushMpnewsMessage panic recover")
+			PushMpnewsMessage(user, message)
 		}
 	}()
 

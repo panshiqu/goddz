@@ -95,8 +95,7 @@ func makeSignature(timestamp string, nonce string) string {
 func procRequest(w http.ResponseWriter, r *http.Request) {
 	defer func() {
 		if err := recover(); err != nil {
-			log.Println("procRequest fatal recover")
-			wechat.PushTextMessage(logic.AdminOpenID, "处理请求崩溃恢复")
+			log.Println("procRequest panic recover")
 		}
 	}()
 
