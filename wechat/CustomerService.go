@@ -66,12 +66,14 @@ func PushTextMessage(user string, message string) {
 
 	body, err := json.MarshalIndent(csm, " ", "  ")
 	if err != nil {
-		log.Fatal("json.MarshalIndent failed ", err)
+		log.Println("json.MarshalIndent failed ", err)
+		panic(err)
 	}
 
 	req, err := http.NewRequest("POST", strings.Join([]string{customerServicePostURL, "?access_token=", ATIns().GetAT()}, ""), bytes.NewReader(body))
 	if err != nil {
-		log.Fatal("http.NewRequest failed ", err)
+		log.Println("http.NewRequest failed ", err)
+		panic(err)
 	}
 
 	req.Header.Set("Content-Type", "application/json; encoding=utf-8")
@@ -80,14 +82,16 @@ func PushTextMessage(user string, message string) {
 	resp, err := client.Do(req)
 
 	if err != nil {
-		log.Fatal("http.Client.Do failed ", err)
+		log.Println("http.Client.Do failed ", err)
+		panic(err)
 	}
 
 	defer resp.Body.Close()
 
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("ioutil.ReadAll failed ", err)
+		log.Println("ioutil.ReadAll failed ", err)
+		panic(err)
 	}
 
 	log.Println("#Send:", csm, string(body))
@@ -110,12 +114,14 @@ func PushImageMessage(user string, message string) {
 
 	body, err := json.MarshalIndent(csm, " ", "  ")
 	if err != nil {
-		log.Fatal("json.MarshalIndent failed ", err)
+		log.Println("json.MarshalIndent failed ", err)
+		panic(err)
 	}
 
 	req, err := http.NewRequest("POST", strings.Join([]string{customerServicePostURL, "?access_token=", ATIns().GetAT()}, ""), bytes.NewReader(body))
 	if err != nil {
-		log.Fatal("http.NewRequest failed ", err)
+		log.Println("http.NewRequest failed ", err)
+		panic(err)
 	}
 
 	req.Header.Set("Content-Type", "application/json; encoding=utf-8")
@@ -124,14 +130,16 @@ func PushImageMessage(user string, message string) {
 	resp, err := client.Do(req)
 
 	if err != nil {
-		log.Fatal("http.Client.Do failed ", err)
+		log.Println("http.Client.Do failed ", err)
+		panic(err)
 	}
 
 	defer resp.Body.Close()
 
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("ioutil.ReadAll failed ", err)
+		log.Println("ioutil.ReadAll failed ", err)
+		panic(err)
 	}
 
 	log.Println("#Send:", csm, string(body))
@@ -154,12 +162,14 @@ func PushMpnewsMessage(user string, message string) {
 
 	body, err := json.MarshalIndent(csm, " ", "  ")
 	if err != nil {
-		log.Fatal("json.MarshalIndent failed ", err)
+		log.Println("json.MarshalIndent failed ", err)
+		panic(err)
 	}
 
 	req, err := http.NewRequest("POST", strings.Join([]string{customerServicePostURL, "?access_token=", ATIns().GetAT()}, ""), bytes.NewReader(body))
 	if err != nil {
-		log.Fatal("http.NewRequest failed ", err)
+		log.Println("http.NewRequest failed ", err)
+		panic(err)
 	}
 
 	req.Header.Set("Content-Type", "application/json; encoding=utf-8")
@@ -168,14 +178,16 @@ func PushMpnewsMessage(user string, message string) {
 	resp, err := client.Do(req)
 
 	if err != nil {
-		log.Fatal("http.Client.Do failed ", err)
+		log.Println("http.Client.Do failed ", err)
+		panic(err)
 	}
 
 	defer resp.Body.Close()
 
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal("ioutil.ReadAll failed ", err)
+		log.Println("ioutil.ReadAll failed ", err)
+		panic(err)
 	}
 
 	log.Println("#Send:", csm, string(body))

@@ -42,12 +42,6 @@ func (a *AccessToken) GetAT() string {
 
 // Refresh 刷新
 func (a *AccessToken) Refresh() {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println("Refresh panic recover")
-		}
-	}()
-
 	request := strings.Join([]string{accessTokenFetchURL,
 		"?grant_type=client_credential&appid=",
 		appID,
@@ -56,24 +50,28 @@ func (a *AccessToken) Refresh() {
 
 	response, err := http.Get(request)
 	if err != nil {
-		log.Fatal("http.Get failed ", err)
+		log.Println("http.Get failed ", err)
+		return
 	}
 
 	defer response.Body.Close()
 
 	if response.StatusCode != http.StatusOK {
-		log.Fatal("response.StatusCode error")
+		log.Println("response.StatusCode error")
+		return
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Fatal("ioutil.ReadAll failed ", err)
+		log.Println("ioutil.ReadAll failed ", err)
+		return
 	}
 
 	if bytes.Contains(body, []byte("access_token")) {
 		atr := &AccessTokenResponse{}
 		if err := json.Unmarshal(body, atr); err != nil {
-			log.Fatal("json.Unmarshal failed ", err)
+			log.Println("json.Unmarshal failed ", err)
+			return
 		}
 
 		a.at = atr.AccessToken
@@ -81,7 +79,8 @@ func (a *AccessToken) Refresh() {
 	} else {
 		ater := &AccessTokenErrorResponse{}
 		if err := json.Unmarshal(body, ater); err != nil {
-			log.Fatal("json.Unmarshal failed ", err)
+			log.Println("json.Unmarshal failed ", err)
+			return
 		}
 
 		log.Println("AccessToken Refresh failed ", ater.Errcode, ater.Errmsg)

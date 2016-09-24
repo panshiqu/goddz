@@ -93,14 +93,7 @@ func makeSignature(timestamp string, nonce string) string {
 }
 
 func procRequest(w http.ResponseWriter, r *http.Request) {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println("procRequest panic recover")
-		}
-	}()
-
 	if err := r.ParseForm(); err != nil {
-		// 不能使用 log.Fatal: invalid URL escape "%%7"
 		log.Println("http.Request.ParseForm failed ", err)
 		return
 	}
@@ -124,13 +117,13 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
-			log.Fatal("ioutil.ReadAll failed ", err)
+			log.Println("ioutil.ReadAll failed ", err)
 			return
 		}
 
 		requestType := &RequestBody{}
 		if err := xml.Unmarshal(body, requestType); err != nil {
-			log.Fatal("xml.Unmarshal failed ", err)
+			log.Println("xml.Unmarshal failed ", err)
 			return
 		}
 
@@ -138,7 +131,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 		if msgType == "TEXT" {
 			requestBody := &TextRequestBody{}
 			if err := xml.Unmarshal(body, requestBody); err != nil {
-				log.Fatal("xml.Unmarshal failed ", err)
+				log.Println("xml.Unmarshal failed ", err)
 				return
 			}
 
@@ -158,7 +151,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 			text, err := xml.MarshalIndent(responseBody, " ", "  ")
 			if err != nil {
-				log.Fatal("xml.MarshalIndent failed ", err)
+				log.Println("xml.MarshalIndent failed ", err)
 				return
 			}
 
@@ -168,7 +161,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 		} else if msgType == "EVENT" {
 			requestBody := &MenuRequestBody{}
 			if err := xml.Unmarshal(body, requestBody); err != nil {
-				log.Fatal("xml.Unmarshal failed ", err)
+				log.Println("xml.Unmarshal failed ", err)
 				return
 			}
 
@@ -190,7 +183,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 		} else if msgType == "VOICE" {
 			requestBody := &VoiceRequestBody{}
 			if err := xml.Unmarshal(body, requestBody); err != nil {
-				log.Fatal("xml.Unmarshal failed ", err)
+				log.Println("xml.Unmarshal failed ", err)
 				return
 			}
 
