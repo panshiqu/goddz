@@ -10,6 +10,7 @@ import (
 
 	"github.com/panshiqu/goddz/wechat"
 	"github.com/seefan/gossdb"
+	"github.com/seefan/gossdb/conf"
 )
 
 // Processor 处理器
@@ -52,7 +53,7 @@ func (p *Processor) InitDB() bool {
 // InitSSDB 初始化SSDB
 func (p *Processor) InitSSDB() bool {
 	var err error
-	p.ssdb, err = gossdb.NewPool(&gossdb.Config{
+	p.ssdb, err = gossdb.NewPool(&conf.Config{
 		Host:             "127.0.0.1",
 		Port:             8888,
 		MaxPoolSize:      50,
