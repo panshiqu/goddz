@@ -27,7 +27,7 @@ const (
 	WelcomeMessage string = "欢迎关注休闲益智游戏服务号，我们将定期更新休闲益智游戏供你挑战，网页版游戏请访问官网：http://13.250.117.241"
 
 	// DataSourceName 数据源名称
-	DataSourceName string = "root:abcwoaini116227@tcp(127.0.0.1:3306)/game?charset=utf8"
+	DataSourceName string = "root@tcp(localhost:3306)/ddz?charset=utf8mb4"
 )
 
 // KV 简单结构
