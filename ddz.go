@@ -237,6 +237,10 @@ func main() {
 
 	// 开启服务
 	http.HandleFunc("/", procRequest)
+	http.HandleFunc("/push", func(w http.ResponseWriter, r *http.Request) {
+		wechat.PushTextMessage(r.FormValue("id"), r.FormValue("message"))
+	})
+	http.HandleFunc("/favicon.ico", func(http.ResponseWriter, *http.Request) {})
 	if err := http.ListenAndServe(":80", nil); err != nil {
 		log.Fatal("http.ListenAndServe failed ", err)
 	}
