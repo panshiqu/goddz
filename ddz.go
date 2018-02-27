@@ -137,6 +137,11 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 
 			log.Println("#Recv:", requestBody)
 
+			if strings.ToLower(requestBody.Content) == "id" {
+				wechat.PushTextMessage(requestBody.FromUserName, requestBody.FromUserName)
+				return
+			}
+
 			go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
 
 			responseBody := &TextResponseBody{
