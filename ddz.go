@@ -142,6 +142,27 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
+			if strings.ToLower(requestBody.Content[:4]) == "bind" {
+				ss := strings.Split(requestBody.Content, " ")
+				if len(ss) != 3 {
+					wechat.PushTextMessage(requestBody.FromUserName, "绑定格式错误")
+					return
+				}
+				resp, err := http.Get(fmt.Sprintf(`http://localhost:8080/bind?id=%s&alias=%s&password=%s&admin=true`, requestBody.FromUserName, ss[1], ss[2]))
+				if err != nil {
+					wechat.PushTextMessage(requestBody.FromUserName, err.Error())
+					return
+				}
+				defer resp.Body.Close()
+				body, err := ioutil.ReadAll(resp.Body)
+				if err != nil {
+					wechat.PushTextMessage(requestBody.FromUserName, err.Error())
+					return
+				}
+				wechat.PushTextMessage(requestBody.FromUserName, string(body))
+				return
+			}
+
 			go logic.PIns().OnEvent(requestBody.FromUserName, requestBody.Content)
 
 			responseBody := &TextResponseBody{
