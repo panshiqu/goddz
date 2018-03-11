@@ -103,7 +103,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 	nonce := strings.Join(r.Form["nonce"], "")
 
 	if signature != makeSignature(timestamp, nonce) {
-		http.Redirect(w, r, "http://13.250.117.241:8080"+r.URL.RequestURI(), http.StatusFound)
+		http.Redirect(w, r, "http://www.iplaygame.com.cn:8080"+r.URL.RequestURI(), http.StatusFound)
 		log.Println("Validate failed")
 		log.Println(r)
 		return
@@ -142,7 +142,7 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			if strings.ToLower(requestBody.Content[:4]) == "bind" {
+			if len(requestBody.Content) > 12 && strings.ToLower(requestBody.Content[:4]) == "bind" {
 				ss := strings.Split(requestBody.Content, " ")
 				if len(ss) != 3 {
 					wechat.PushTextMessage(requestBody.FromUserName, "绑定格式错误")
